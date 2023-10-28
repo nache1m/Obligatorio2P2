@@ -21,7 +21,10 @@ public class Tematica {
         this.descripcion = descripcion;
     }
     
-    // Constructor.
+    public Tematica (String nombre, String desc) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
     
     // Metodos..
 }
