@@ -33,4 +33,14 @@ public class Sistema {
     // Constructor.
     
     // Metodos.
+    public boolean tematicaRepetida (String nombre){
+        ArrayList<Tematica> lista = this.listaTematicas;
+        boolean encontre = false;
+        for (int i=0; i < lista.size(); i++){
+            if (lista.get(i).getNombre().equalsIgnoreCase(nombre)){
+                encontre = true;
+            }
+        }
+        return encontre;
+    }
 }
