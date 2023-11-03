@@ -28,38 +28,28 @@ public class VentanaRegistroTematica extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlPanel = new javax.swing.JPanel();
         lblRegistroTematica = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
+        lblNombre = new javax.swing.JLabel();
         lblNombre1 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
-        lblNombre = new javax.swing.JLabel();
-        btnCancelar = new javax.swing.JButton();
-        btnRegistrar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Registro de Temática");
         getContentPane().setLayout(null);
+
+        pnlPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlPanel.setLayout(null);
 
         lblRegistroTematica.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblRegistroTematica.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRegistroTematica.setText("Registro de Temática");
-        getContentPane().add(lblRegistroTematica);
-        lblRegistroTematica.setBounds(140, 20, 120, 16);
-
-        lblNombre1.setText("Nombre:");
-        getContentPane().add(lblNombre1);
-        lblNombre1.setBounds(50, 70, 60, 16);
-        getContentPane().add(txtNombre);
-        txtNombre.setBounds(150, 70, 200, 22);
-
-        jScrollPane1.setViewportView(jTextPane1);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(150, 120, 200, 70);
-
-        lblNombre.setText("Descripción:");
-        getContentPane().add(lblNombre);
-        lblNombre.setBounds(50, 120, 70, 16);
+        pnlPanel.add(lblRegistroTematica);
+        lblRegistroTematica.setBounds(110, 20, 120, 16);
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -67,8 +57,8 @@ public class VentanaRegistroTematica extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelar);
-        btnCancelar.setBounds(40, 230, 90, 23);
+        pnlPanel.add(btnCancelar);
+        btnCancelar.setBounds(40, 210, 90, 23);
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -76,23 +66,37 @@ public class VentanaRegistroTematica extends javax.swing.JFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistrar);
-        btnRegistrar.setBounds(270, 230, 90, 23);
+        pnlPanel.add(btnRegistrar);
+        btnRegistrar.setBounds(220, 210, 90, 23);
+
+        lblNombre.setText("Descripción:");
+        pnlPanel.add(lblNombre);
+        lblNombre.setBounds(30, 110, 70, 16);
+
+        lblNombre1.setText("Nombre:");
+        pnlPanel.add(lblNombre1);
+        lblNombre1.setBounds(30, 70, 60, 16);
+        pnlPanel.add(txtNombre);
+        txtNombre.setBounds(130, 70, 180, 20);
+
+        jScrollPane1.setViewportView(jTextPane1);
+
+        pnlPanel.add(jScrollPane1);
+        jScrollPane1.setBounds(130, 110, 180, 70);
+
+        getContentPane().add(pnlPanel);
+        pnlPanel.setBounds(30, 20, 340, 260);
 
         setSize(new java.awt.Dimension(414, 307));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        MenuVentanas menu = new MenuVentanas();
-        menu.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        MenuVentanas menu = new MenuVentanas();
-        menu.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
 
@@ -104,6 +108,7 @@ public class VentanaRegistroTematica extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
     private javax.swing.JLabel lblRegistroTematica;
+    private javax.swing.JPanel pnlPanel;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

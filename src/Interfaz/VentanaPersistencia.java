@@ -60,9 +60,9 @@ public class VentanaPersistencia extends javax.swing.JFrame {
         jButton2.setBounds(194, 97, 72, 23);
 
         getContentPane().add(pnlPanel);
-        pnlPanel.setBounds(30, 50, 340, 190);
+        pnlPanel.setBounds(30, 20, 340, 190);
 
-        setSize(new java.awt.Dimension(414, 307));
+        setSize(new java.awt.Dimension(410, 236));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

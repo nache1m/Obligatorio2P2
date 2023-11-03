@@ -38,12 +38,11 @@ public class MenuVentanas extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         itmRegistroPuesto = new javax.swing.JMenuItem();
         itmConsultaPuesto = new javax.swing.JMenuItem();
-        fileMenu = new javax.swing.JMenu();
-        exitMenuItem = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menú Principal");
         getContentPane().setLayout(null);
 
         menPostulantes.setText("Postulantes");
@@ -57,6 +56,11 @@ public class MenuVentanas extends javax.swing.JFrame {
         menPostulantes.add(itmAltaPostulante);
 
         itmBajaPostulante.setText("Baja de postulante");
+        itmBajaPostulante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmBajaPostulanteActionPerformed(evt);
+            }
+        });
         menPostulantes.add(itmBajaPostulante);
 
         itmHistoriaPostulante.setText("Historia postulante");
@@ -104,29 +108,11 @@ public class MenuVentanas extends javax.swing.JFrame {
 
         menuBar.add(jMenu1);
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("Salir");
-
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Salir");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(exitMenuItem);
-
-        menuBar.add(fileMenu);
-
         setJMenuBar(menuBar);
 
-        setSize(new java.awt.Dimension(414, 305));
+        setSize(new java.awt.Dimension(368, 407));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void itmRegistroTematicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmRegistroTematicaActionPerformed
             VentanaRegistroTematica v = new VentanaRegistroTematica();
@@ -135,16 +121,20 @@ public class MenuVentanas extends javax.swing.JFrame {
     }//GEN-LAST:event_itmRegistroTematicaActionPerformed
 
     private void itmAltaPostulanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAltaPostulanteActionPerformed
-        // TODO add your handling code here:
+        VentanaAltaPostulante v = new VentanaAltaPostulante();
+        v.setVisible(true);
     }//GEN-LAST:event_itmAltaPostulanteActionPerformed
 
     private void itmRegistroEntrevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmRegistroEntrevistaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_itmRegistroEntrevistaActionPerformed
 
+    private void itmBajaPostulanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmBajaPostulanteActionPerformed
+        VentanaBajaPostulante v = new VentanaBajaPostulante();
+        v.setVisible(true);
+    }//GEN-LAST:event_itmBajaPostulanteActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu fileMenu;
     private javax.swing.JMenuItem itmAltaPostulante;
     private javax.swing.JMenuItem itmBajaPostulante;
     private javax.swing.JMenuItem itmConsultaPuesto;
