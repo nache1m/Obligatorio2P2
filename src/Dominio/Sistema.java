@@ -1,14 +1,18 @@
 
 package Dominio;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.io.Serializable;
 import java.util.*;
-public class Sistema {
+
+public class Sistema implements Serializable {
     
     private ArrayList<Postulante> listaPostulantes;
     private ArrayList<Evaluador> listaEvaluadores;
     private ArrayList<Puesto> listaPuestos;
     private ArrayList<Entrevista> listaEntrevistas;
     private ArrayList<Tematica> listaTematicas;
-    
+    private PropertyChangeSupport manejador = new PropertyChangeSupport(this);
     // Getters y Setters.
     public ArrayList<Postulante> getListaPostulantes() {
         return listaPostulantes;
@@ -42,5 +46,16 @@ public class Sistema {
             }
         }
         return encontre;
+    }
+    
+    
+    public void agregarEscuchas (PropertyChangeListener c) {
+        manejador.addPropertyChangeListener(c);
+    }
+
+    public void altaPostulante(Postulante nuevoPostulante) {
+        ArrayList listaDesactualizada = listaPostulantes;
+        listaPostulantes.add(nuevoPostulante);
+        manejador.firePropertyChange("listaPostulantes", listaDesactualizada, listaPostulantes);
     }
 }

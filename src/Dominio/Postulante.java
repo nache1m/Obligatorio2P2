@@ -1,6 +1,7 @@
 
 package Dominio;
 
+import java.beans.PropertyChangeSupport;
 import java.util.*;
 
 public class Postulante extends Persona {
@@ -8,7 +9,8 @@ public class Postulante extends Persona {
     private String email;
     private String linkedIn;
     private int tipoTrabajo;
-    private static HashMap<Tematica,Integer> nivelYTemas;
+    private HashMap<Tematica,Integer> nivelYTemas;
+    
 
     
     // Getters y Setters.
@@ -52,15 +54,17 @@ public class Postulante extends Persona {
         this.nivelYTemas = nivelYTemas;
     }
     
-    // Constructor.
-    public Postulante(String nombre, String cedula, String telefono, String email,String linkedIn, int tipoTrabajo, Tematica tema, Integer nivel){
+   
+
+    //Constructor sin Tematica y Nivel
+      public Postulante(String nombre, String cedula, String telefono, String email,String linkedIn, int tipoTrabajo){
         super.setNombre(nombre);
         super.setCedula(cedula);
         this.telefono = telefono;
         this.email = email;
         this.linkedIn = linkedIn;
-        this.tipoTrabajo = tipoTrabajo;
-        this.nivelYTemas.put(tema, nivel);
+        this.tipoTrabajo = tipoTrabajo; // Mixto = 0 Remoto = 1 Presencial = 2
+       
     }
     
     // Metodos.

@@ -4,17 +4,23 @@
  */
 package Interfaz;
 
+import Dominio.Postulante;
+import Dominio.Sistema;
+
 /**
  *
  * @author elnac
  */
 public class VentanaAltaPostulante2 extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentanaAltaPostulante2
-     */
-    public VentanaAltaPostulante2() {
+    private Sistema modelo;
+    private Postulante postulante;
+    
+    public VentanaAltaPostulante2(Sistema miSistema, Postulante miPostulante) {
         initComponents();
+        this.modelo = miSistema;
+        this.postulante = miPostulante;
+        
     }
 
     /**

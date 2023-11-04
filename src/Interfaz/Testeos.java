@@ -1,21 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Interfaz;
 
 import Dominio.Postulante;
+import Dominio.Sistema;
 import Dominio.Tematica;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 public class Testeos {
-    public static void main (String [] args ) {
-        Tematica temaA = new Tematica ("JavasScript", "Sirve para codear.");
-        Tematica temaB = new Tematica ("C#", "Sirve para aprender");
-        Postulante posA= new Postulante("Eze", "5.064.910-7", "099364343", "ezequielpepedemonte@gmail.com" ,"elEze",2, temaA, 4);
-        Postulante posB= new Postulante("Nacho", "Sin cedula", "091219658", "nacheim@gmail.com" ,"nacheim", 1, temaB, 5);
-        //System.out.println(posA.obtenerTematicas());
-        //System.out.println(posB.darNivelTematica(temaB));
-        System.out.println(posA);
+    public static void main (String [] args ) throws FileNotFoundException {
+        VentanaPersistencia ventanaPersis = new VentanaPersistencia();
+        ventanaPersis.setVisible(true);
+        
+        Sistema modelo = ventanaPersis.getModelo();
+        ObjectOutputStream out;
+        try {
+            out = new ObjectOutputStream (new FileOutputStream("salida"));
+            out.writeObject(modelo);
+            out.close();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "A ocurrido algo inexperado. No se puedo persistir el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+       
+
     }
 }

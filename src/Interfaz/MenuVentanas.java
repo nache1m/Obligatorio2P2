@@ -4,14 +4,19 @@
  */
 package Interfaz;
 
+import Dominio.Sistema;
+
 /**
  *
  * @author elnac
  */
 public class MenuVentanas extends javax.swing.JFrame {
     
-    public MenuVentanas() {
+    private Sistema modelo;
+    
+    public MenuVentanas(Sistema miSistema) {
         initComponents();
+        this.modelo = miSistema;
     }
 
     /**
@@ -121,8 +126,8 @@ public class MenuVentanas extends javax.swing.JFrame {
     }//GEN-LAST:event_itmRegistroTematicaActionPerformed
 
     private void itmAltaPostulanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAltaPostulanteActionPerformed
-        VentanaAltaPostulante v = new VentanaAltaPostulante();
-        v.setVisible(true);
+        //VentanaAltaPostulante v = new VentanaAltaPostulante(sistema);
+       // v.setVisible(true);
     }//GEN-LAST:event_itmAltaPostulanteActionPerformed
 
     private void itmRegistroEntrevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmRegistroEntrevistaActionPerformed

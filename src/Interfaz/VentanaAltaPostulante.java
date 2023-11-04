@@ -4,17 +4,23 @@
  */
 package Interfaz;
 
+import Dominio.Postulante;
+import Dominio.Sistema;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 /**
  *
  * @author elnac
  */
-public class VentanaAltaPostulante extends javax.swing.JFrame {
+public class VentanaAltaPostulante extends javax.swing.JFrame implements PropertyChangeListener {
 
-    /**
-     * Creates new form VentanaAltaPostulante
-     */
-    public VentanaAltaPostulante() {
+    private Sistema modelo;
+
+    public VentanaAltaPostulante(Sistema sistema) {
         initComponents();
+        this.modelo = sistema;
+        modelo.agregarEscuchas(this);
     }
 
     /**
@@ -55,6 +61,12 @@ public class VentanaAltaPostulante extends javax.swing.JFrame {
         lblAltaPostulante.setText("Alta Postulante");
 
         lblNombre1.setText("Nombre:");
+
+        txtCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedulaActionPerformed(evt);
+            }
+        });
 
         lblCedula.setText("Cedula:");
 
@@ -205,11 +217,36 @@ public class VentanaAltaPostulante extends javax.swing.JFrame {
         grupoBotones.add(rbtnMixto);
         grupoBotones.add(rbtnPresencial);
         grupoBotones.add(rbtnRemoto);
-        VentanaAltaPostulante2 v = new VentanaAltaPostulante2();
-        v.setVisible(true);
+        String nombre = txtNombre1.getText();
+        String cedula = txtCedula.getText();
+        String telefono = txtTelefono.getText();
+        String email = txtMail.getText();
+        String LinkedIn = txtLinkedin.getText();
+        // Mixto = 0
+        // Remoto = 1
+        //¨Presencial = 2
+        int tipoDeTrabajo;
+        if(rbtnMixto.isSelected()) {
+            tipoDeTrabajo = 0;
+        } else {
+            if (rbtnPresencial.isSelected()) {
+                tipoDeTrabajo = 2;
+            }
+            else {
+                tipoDeTrabajo = 1;
+            }
+        } 
+       Postulante nuevoPostulante = new Postulante (nombre, cedula, telefono, email, LinkedIn, tipoDeTrabajo);
+       modelo.altaPostulante(nuevoPostulante);
+       VentanaAltaPostulante2 v = new VentanaAltaPostulante2(modelo, nuevoPostulante);
+       v.setVisible(true);
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
- 
+    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedulaActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSiguiente;
@@ -232,4 +269,9 @@ public class VentanaAltaPostulante extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre1;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        //Aquí va lo que quiero actualizar
+    }
 }
