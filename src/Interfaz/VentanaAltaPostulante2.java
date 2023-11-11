@@ -6,12 +6,17 @@ package Interfaz;
 
 import Dominio.Postulante;
 import Dominio.Sistema;
+import Dominio.Tematica;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
 
 /**
  *
  * @author elnac
  */
-public class VentanaAltaPostulante2 extends javax.swing.JFrame {
+public class VentanaAltaPostulante2 extends javax.swing.JFrame implements PropertyChangeListener {
 
     private Sistema modelo;
     private Postulante postulante;
@@ -19,7 +24,9 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame {
     public VentanaAltaPostulante2(Sistema miSistema, Postulante miPostulante) {
         initComponents();
         this.modelo = miSistema;
+        modelo.agregarEscuchas(this);
         this.postulante = miPostulante;
+        agregarTemasAlCombo(cbTema, modelo.getListaTematicas());
         
     }
 
@@ -35,7 +42,7 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame {
         lblExperiencia = new javax.swing.JLabel();
         cbTema = new javax.swing.JComboBox<>();
         lblTema1 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        spinNivel = new javax.swing.JSpinner();
         btnRegistrar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         lblTema2 = new javax.swing.JLabel();
@@ -43,7 +50,7 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame {
         btnEliminar1 = new javax.swing.JButton();
         btnCancelar1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstExperiencia = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alta Postulante");
@@ -67,8 +74,8 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame {
         lblTema1.setText("Tema:");
         getContentPane().add(lblTema1);
         lblTema1.setBounds(40, 30, 37, 16);
-        getContentPane().add(jSpinner1);
-        jSpinner1.setBounds(130, 70, 80, 22);
+        getContentPane().add(spinNivel);
+        spinNivel.setBounds(130, 70, 80, 22);
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -112,12 +119,7 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame {
         getContentPane().add(btnCancelar1);
         btnCancelar1.setBounds(40, 230, 80, 23);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(lstExperiencia);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(130, 130, 210, 80);
@@ -135,11 +137,21 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
-        // TODO add your handling code here:
+        //agregarTryandCatch y clase throwable
+        int nivel1 =  Integer.parseInt(String.valueOf(spinNivel.getValue()));
+        Tematica tema = (Tematica )cbTema.getSelectedItem();
+        this.postulante.agregarTema(tema, nivel1);
+        spinNivel.setValue(0);
+        cbTema.setSelectedIndex(0);
+        lstExperiencia.setListData(modelo.darExperiencias(this.postulante));
+        
     }//GEN-LAST:event_btnAgregar1ActionPerformed
 
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
-        // TODO add your handling code here:
+
+       String [] experiencia = lstExperiencia.getSelectedValue().split("\\(");
+       String nombreTematica = experiencia[0];
+       modelo.borrarTematicaYNivel(nombreTematica);
     }//GEN-LAST:event_btnEliminar1ActionPerformed
 
     private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
@@ -152,13 +164,25 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar1;
     private javax.swing.JButton btnEliminar1;
     private javax.swing.JButton btnRegistrar;
-    private javax.swing.JComboBox<String> cbTema;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JComboBox<Tematica> cbTema;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel lblExperiencia;
     private javax.swing.JLabel lblTema1;
     private javax.swing.JLabel lblTema2;
+    private javax.swing.JList<String> lstExperiencia;
+    private javax.swing.JSpinner spinNivel;
     // End of variables declaration//GEN-END:variables
+
+    
+    private void agregarTemasAlCombo(JComboBox<Tematica> cbTema, ArrayList<Tematica> listaTematicas) {
+        for(Tematica elem: modelo.getListaTematicas()) {
+            cbTema.addItem(elem);
+        }
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        lstExperiencia.setListData(modelo.darExperiencias(this.postulante));
+    }
 }

@@ -26,5 +26,7 @@ public class Tematica {
         this.descripcion = descripcion;
     }
     
-    // Metodos..
-}
+   public String toString() {
+       
+       return this.nombre;
+   }}

@@ -49,7 +49,9 @@ public class Sistema implements Serializable {
     }
     
     public void agregarTematica (Tematica tema) {
+        ArrayList listaDesactualizada = listaTematicas;
         this.listaTematicas.add(tema);
+        manejador.firePropertyChange("listaTematicas", listaDesactualizada, listaTematicas);
     }
     
     public void agregarEscuchas (PropertyChangeListener c) {
@@ -60,5 +62,22 @@ public class Sistema implements Serializable {
         ArrayList listaDesactualizada = listaPostulantes;
         listaPostulantes.add(nuevoPostulante);
         manejador.firePropertyChange("listaPostulantes", listaDesactualizada, listaPostulantes);
+    }
+    
+    public String [] darExperiencias (Postulante p) {
+        String [] res = new String [this.getListaTematicas().size()];
+        HashMap<Tematica, Integer> hashMap = p.getNivelYTemas();
+        Collection <Tematica> llaves = hashMap.keySet();
+        int contador = 0;    
+        for (Tematica llave : llaves) {
+            String txt = llave + "("+ hashMap.get(llave) +")";
+            res[contador] = txt;
+            contador++;
+            }
+        return res;
+    }
+
+    public void borrarTematicaYNivel(String nombreTematica) {
+       //continuarAcá
     }
 }
