@@ -56,7 +56,6 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame {
         getContentPane().add(lblExperiencia);
         lblExperiencia.setBounds(40, 130, 70, 16);
 
-        cbTema.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbTema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTemaActionPerformed(evt);

@@ -4,6 +4,8 @@
  */
 package Interfaz;
 
+import Dominio.Sistema;
+import Dominio.Tematica;
 import Interfaz.MenuVentanas;
 
 /**
@@ -11,12 +13,12 @@ import Interfaz.MenuVentanas;
  * @author elnac
  */
 public class VentanaRegistroTematica extends javax.swing.JFrame {
-
-    /**
-     * Creates new form VentanaRegistroTematica
-     */
-    public VentanaRegistroTematica() {
+    
+    private Sistema modelo;
+    
+    public VentanaRegistroTematica(Sistema miModelo) {
         initComponents();
+        modelo = miModelo;
     }
 
     /**
@@ -36,7 +38,7 @@ public class VentanaRegistroTematica extends javax.swing.JFrame {
         lblNombre1 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        txtDesc = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro de Temática");
@@ -79,7 +81,7 @@ public class VentanaRegistroTematica extends javax.swing.JFrame {
         pnlPanel.add(txtNombre);
         txtNombre.setBounds(130, 70, 180, 20);
 
-        jScrollPane1.setViewportView(jTextPane1);
+        jScrollPane1.setViewportView(txtDesc);
 
         pnlPanel.add(jScrollPane1);
         jScrollPane1.setBounds(130, 110, 180, 70);
@@ -92,7 +94,12 @@ public class VentanaRegistroTematica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        this.dispose();
+        String nombre = txtNombre.getText();
+        String descripcion = txtDesc.getText();
+        Tematica nuevaTematica = new Tematica (nombre, descripcion);
+        modelo.agregarTematica(nuevaTematica);
+        txtNombre.setText("");
+        txtDesc.setText("");
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -104,11 +111,11 @@ public class VentanaRegistroTematica extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
     private javax.swing.JLabel lblRegistroTematica;
     private javax.swing.JPanel pnlPanel;
+    private javax.swing.JTextPane txtDesc;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

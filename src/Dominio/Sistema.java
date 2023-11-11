@@ -48,6 +48,9 @@ public class Sistema implements Serializable {
         return encontre;
     }
     
+    public void agregarTematica (Tematica tema) {
+        this.listaTematicas.add(tema);
+    }
     
     public void agregarEscuchas (PropertyChangeListener c) {
         manejador.addPropertyChangeListener(c);

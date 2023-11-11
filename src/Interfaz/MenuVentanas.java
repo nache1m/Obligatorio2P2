@@ -120,7 +120,7 @@ public class MenuVentanas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itmRegistroTematicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmRegistroTematicaActionPerformed
-            VentanaRegistroTematica v = new VentanaRegistroTematica();
+            VentanaRegistroTematica v = new VentanaRegistroTematica(modelo);
             v.setVisible(true);
             // Metodo para registrar.
     }//GEN-LAST:event_itmRegistroTematicaActionPerformed
