@@ -76,6 +76,11 @@ public class MenuVentanas extends javax.swing.JFrame {
         menEvaluadores.setText("Evaluadores y entrevistas");
 
         itmRegistroEvaluador.setText("Registro de evaluador");
+        itmRegistroEvaluador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmRegistroEvaluadorActionPerformed(evt);
+            }
+        });
         menEvaluadores.add(itmRegistroEvaluador);
 
         itmRegistroEntrevista.setText("Registro de entrevista");
@@ -126,8 +131,8 @@ public class MenuVentanas extends javax.swing.JFrame {
     }//GEN-LAST:event_itmRegistroTematicaActionPerformed
 
     private void itmAltaPostulanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAltaPostulanteActionPerformed
-        //VentanaAltaPostulante v = new VentanaAltaPostulante(sistema);
-       // v.setVisible(true);
+        VentanaAltaPostulante v = new VentanaAltaPostulante(modelo);
+        v.setVisible(true);
     }//GEN-LAST:event_itmAltaPostulanteActionPerformed
 
     private void itmRegistroEntrevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmRegistroEntrevistaActionPerformed
@@ -138,6 +143,11 @@ public class MenuVentanas extends javax.swing.JFrame {
         VentanaBajaPostulante v = new VentanaBajaPostulante();
         v.setVisible(true);
     }//GEN-LAST:event_itmBajaPostulanteActionPerformed
+
+    private void itmRegistroEvaluadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmRegistroEvaluadorActionPerformed
+        VentanaRegistroEvaluador v = new VentanaRegistroEvaluador(modelo);
+        v.setVisible(true);
+    }//GEN-LAST:event_itmRegistroEvaluadorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itmAltaPostulante;

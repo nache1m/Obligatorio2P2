@@ -14,12 +14,9 @@ import javax.swing.JOptionPane;
  * @author elnac
  */
 public class VentanaPersistencia extends javax.swing.JFrame {
-
     private Sistema modelo;
-
     public VentanaPersistencia() {
         initComponents();
-
     }
 
     @SuppressWarnings("unchecked")

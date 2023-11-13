@@ -1,18 +1,16 @@
-
 package Dominio;
 
 import java.beans.PropertyChangeSupport;
 import java.util.*;
 
 public class Postulante extends Persona {
+
     private String telefono;
     private String email;
     private String linkedIn;
     private int tipoTrabajo;
-    private HashMap<Tematica,Integer> nivelYTemas;
-    
+    private HashMap<Tematica, Integer> nivelYTemas;
 
-    
     // Getters y Setters.
     public String getTelefono() {
         return telefono;
@@ -33,7 +31,7 @@ public class Postulante extends Persona {
     public String getLinkedIn() {
         return linkedIn;
     }
-    
+
     public void setLinkedIn(String linkedIn) {
         this.linkedIn = linkedIn;
     }
@@ -53,53 +51,49 @@ public class Postulante extends Persona {
     public void setNivelYTemas(HashMap nivelYTemas) {
         this.nivelYTemas = nivelYTemas;
     }
-    
-   
 
     //Constructor sin Tematica y Nivel
-      public Postulante(String nombre, String cedula, String telefono, String email,String linkedIn, int tipoTrabajo){
+    public Postulante(String nombre, String cedula, String telefono, String email, String linkedIn, int tipoTrabajo) {
         super.setNombre(nombre);
         super.setCedula(cedula);
         this.telefono = telefono;
         this.email = email;
         this.linkedIn = linkedIn;
         this.tipoTrabajo = tipoTrabajo; // Mixto = 0 Remoto = 1 Presencial = 2
-       
+
     }
-    
+
     // Metodos.
-    public void borrarTema(Tematica tema){
+    public void borrarTema(Tematica tema) {
         this.nivelYTemas.remove(tema);
     }
-    
-    public void agregarTema(Tematica tema, Integer nivel){
+
+    public void agregarTema(Tematica tema, Integer nivel) {
         this.nivelYTemas.put(tema, nivel);
     }
-    
-    public Integer darNivelTematica (Tematica tema) {  ///Falta testear
+
+    public Integer darNivelTematica(Tematica tema) {  ///Falta testear
         return (Integer) this.getNivelYTemas().get(tema);
-        
+
     }
-    
-    public ArrayList obtenerTematicas () {
+
+    public ArrayList obtenerTematicas() {
         ArrayList res = new ArrayList();
-        for(Object key : this.getNivelYTemas().keySet()) {
+        for (Object key : this.getNivelYTemas().keySet()) {
             res.add(key);
         }
-        
+
         return res;
     }
-    
-    public String [] obtenerNiveles () {
-    
-    return (String[]) this.getNivelYTemas().values().toArray(new String [this.getNivelYTemas().size()]);
-    }
-    
-    public String toString() {
-    
-    return super.getNombre();
-    }
-    
-    
-}
 
+    public String[] obtenerNiveles() {
+
+        return (String[]) this.getNivelYTemas().values().toArray(new String[this.getNivelYTemas().size()]);
+    }
+
+    public String toString() {
+
+        return super.getNombre();
+    }
+
+}

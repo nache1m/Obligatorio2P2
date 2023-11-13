@@ -13,6 +13,7 @@ public class Sistema implements Serializable {
     private ArrayList<Entrevista> listaEntrevistas;
     private ArrayList<Tematica> listaTematicas;
     private PropertyChangeSupport manejador = new PropertyChangeSupport(this);
+    
     // Getters y Setters.
     public ArrayList<Postulante> getListaPostulantes() {
         return listaPostulantes;
@@ -35,6 +36,13 @@ public class Sistema implements Serializable {
     }
     
     // Constructor.
+    public Sistema (){
+        listaPostulantes = new ArrayList();
+        listaEvaluadores = new ArrayList();
+        listaPuestos = new ArrayList();
+        listaEntrevistas = new ArrayList();
+        listaTematicas = new ArrayList();
+    }
     
     // Metodos.
     public boolean tematicaRepetida (String nombre){
@@ -46,6 +54,10 @@ public class Sistema implements Serializable {
             }
         }
         return encontre;
+    }
+    
+    public void agregarEvaluador(Evaluador ev){
+        this.getListaEvaluadores().add(ev);
     }
     
     public void agregarTematica (Tematica tema) {
@@ -76,7 +88,7 @@ public class Sistema implements Serializable {
             }
         return res;
     }
-
+    
     public void borrarTematicaYNivel(String nombreTematica) {
        //continuarAcá
     }
