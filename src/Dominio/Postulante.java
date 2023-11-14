@@ -9,8 +9,7 @@ public class Postulante extends Persona {
     private String email;
     private String linkedIn;
     private int tipoTrabajo;
-    private HashMap<Tematica, Integer> nivelYTemas;
-
+    private HashMap<Tematica, Integer> nivelYTemas = new HashMap<>();
     // Getters y Setters.
     public String getTelefono() {
         return telefono;

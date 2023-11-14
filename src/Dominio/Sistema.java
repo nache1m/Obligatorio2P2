@@ -61,7 +61,7 @@ public class Sistema implements Serializable {
     }
     
     public void agregarTematica (Tematica tema) {
-        ArrayList listaDesactualizada = listaTematicas;
+        ArrayList <Tematica> listaDesactualizada = listaTematicas;
         this.listaTematicas.add(tema);
         manejador.firePropertyChange("listaTematicas", listaDesactualizada, listaTematicas);
     }
