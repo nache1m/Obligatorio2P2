@@ -5,6 +5,11 @@
 package Interfaz;
 
 import Dominio.Sistema;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 /**
  *
@@ -17,6 +22,7 @@ public class MenuVentanas extends javax.swing.JFrame {
     public MenuVentanas(Sistema miSistema) {
         initComponents();
         this.modelo = miSistema;
+        persistirAlCerrarVentana();
     }
 
     /**
@@ -175,5 +181,34 @@ public class MenuVentanas extends javax.swing.JFrame {
     private javax.swing.JMenu menTematica;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
+
+    //Metodo para detectar el cierre de la ventana
+    private void persistirAlCerrarVentana() {
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                guardarSistemaEnArchivo();
+            }
+        });
+    }
+   
+    @Override
+    protected void processWindowEvent(WindowEvent e) {
+    if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+        guardarSistemaEnArchivo();
+    }
+    super.processWindowEvent(e);
+}
+
+    //Método para persitir la ventana
+    private void guardarSistemaEnArchivo() {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("salida"))) {
+            out.writeObject(this.modelo);
+            out.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Completar luego
+        }
+    }
 
 }

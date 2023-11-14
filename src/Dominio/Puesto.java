@@ -1,9 +1,10 @@
 
 package Dominio;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Puesto {
+public class Puesto implements Serializable {
     private String nombre;
     private int tipo;
     private ArrayList<Tematica> temas;

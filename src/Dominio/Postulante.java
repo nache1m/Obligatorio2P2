@@ -1,9 +1,10 @@
 package Dominio;
 
 import java.beans.PropertyChangeSupport;
+import java.io.Serializable;
 import java.util.*;
 
-public class Postulante extends Persona {
+public class Postulante extends Persona implements Serializable {
 
     private String telefono;
     private String email;

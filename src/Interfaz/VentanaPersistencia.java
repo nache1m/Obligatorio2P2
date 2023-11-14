@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author elnac
  */
 public class VentanaPersistencia extends javax.swing.JFrame {
-    private Sistema modelo;
+
     public VentanaPersistencia() {
         initComponents();
     }
@@ -68,34 +68,37 @@ public class VentanaPersistencia extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
+           try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("salida"));
-            Sistema modelo = (Sistema) in.readObject();
-            this.modelo = modelo;
-            MenuVentanas menu = new MenuVentanas(modelo);
+            Sistema sistemaLeido = (Sistema) in.readObject();
+            in.close();
+
+            MenuVentanas menu = new MenuVentanas(sistemaLeido);
             menu.setVisible(true);
-            this.setVisible(false);
+            this.dispose();
+
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "No existe archivo para persistir", "Error", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null, "Se creará un nuevo sistema", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             this.crearModeloDesdeCero();
 
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "A ocurrido algo inexperado. No se puedo persistir el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "A ocurrido algo inesperado. No se pudo persistir el archivo", "Error", JOptionPane.ERROR_MESSAGE);
             JOptionPane.showMessageDialog(null, "Se creará un nuevo sistema", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             this.crearModeloDesdeCero();
+
         } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "A ocurrido algo inexperado. No se puedo persistir el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "A ocurrido algo inesperado. No se pudo persistir el archivo", "Error", JOptionPane.ERROR_MESSAGE);
             JOptionPane.showMessageDialog(null, "Se creará un nuevo sistema", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             this.crearModeloDesdeCero();
         }
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     public void crearModeloDesdeCero() {
     Sistema modelo = new Sistema();
          
-    this.modelo  = modelo;
     MenuVentanas menu = new MenuVentanas(modelo);
 
     menu.setVisible (
@@ -115,9 +118,6 @@ false);
     private javax.swing.JPanel pnlPanel;
     // End of variables declaration//GEN-END:variables
 
-    public Sistema getModelo() {
-        return modelo;
-    }
 
    
 }
