@@ -176,6 +176,7 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame implements Proper
 
     
     private void agregarTemasAlCombo(JComboBox<Tematica> cbTema, ArrayList<Tematica> listaTematicas) {
+        cbTema.removeAllItems();
         for(Tematica elem: modelo.getListaTematicas()) {
             cbTema.addItem(elem);
         }
@@ -184,5 +185,6 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame implements Proper
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         lstExperiencia.setListData(modelo.darExperiencias(this.postulante));
+        agregarTemasAlCombo(cbTema, modelo.getListaTematicas());
     }
 }

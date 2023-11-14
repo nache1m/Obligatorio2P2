@@ -61,9 +61,9 @@ public class Sistema implements Serializable {
     }
     
     public void agregarTematica (Tematica tema) {
-        ArrayList <Tematica> listaDesactualizada = listaTematicas;
+        ArrayList <Tematica> listaTemaVieja = new ArrayList<>(listaTematicas);
         this.listaTematicas.add(tema);
-        manejador.firePropertyChange("listaTematicas", listaDesactualizada, listaTematicas);
+        manejador.firePropertyChange("listaTematicas", listaTemaVieja, listaTematicas);
     }
     
     public void agregarEscuchas (PropertyChangeListener c) {
@@ -71,9 +71,10 @@ public class Sistema implements Serializable {
     }
 
     public void altaPostulante(Postulante nuevoPostulante) {
-        ArrayList listaDesactualizada = listaPostulantes;
-        listaPostulantes.add(nuevoPostulante);
-        manejador.firePropertyChange("listaPostulantes", listaDesactualizada, listaPostulantes);
+        ArrayList<Postulante> listaDesactualizada = new ArrayList<>(listaPostulantes);
+    listaPostulantes.add(nuevoPostulante);
+    manejador.firePropertyChange("listaPostulantes", listaDesactualizada, listaPostulantes);
+
     }
     
     public String [] darExperiencias (Postulante p) {
