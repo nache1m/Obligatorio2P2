@@ -64,7 +64,7 @@ public class Postulante extends Persona implements Serializable {
     }
 
     // Metodos.
-    public void borrarTema(Tematica tema) {
+    public void borrarExperiencia(Tematica tema) {
         this.nivelYTemas.remove(tema);
     }
 

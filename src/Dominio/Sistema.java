@@ -4,6 +4,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.*;
+import static java.util.Arrays.sort;
 
 public class Sistema implements Serializable {
     
@@ -77,7 +78,7 @@ public class Sistema implements Serializable {
 
     }
     
-    public String [] darExperiencias (Postulante p) {
+    public String [] darExperiencias(Postulante p) {
         String [] res = new String [this.getListaTematicas().size()];
         HashMap<Tematica, Integer> hashMap = p.getNivelYTemas();
         Collection <Tematica> llaves = hashMap.keySet();
@@ -87,10 +88,46 @@ public class Sistema implements Serializable {
             res[contador] = txt;
             contador++;
             }
+        this.ordenarExperiencias(p, res);
         return res;
     }
     
-    public void borrarTematicaYNivel(String nombreTematica) {
-       //continuarAcá
+    public void borrarTematica(String nombreTematica) {
+       for(Tematica elem : this.listaTematicas) {
+           if (elem.getNombre().equals(nombreTematica)) {
+               this.listaTematicas.remove(elem);
+           }
+       }
+    }
+
+    public void borrarExperiencia(String nombreTematica, Postulante p) {
+       for(Tematica elem : this.listaTematicas) {
+           if (elem.getNombre().equals(nombreTematica)) {
+               p.borrarExperiencia(elem);
+           }
+       }
+    }
+
+    public void ordenarExperiencias(Postulante postulante, String [] experiencias) {
+       Arrays.sort(experiencias, new Comparator () {
+            @Override
+            public int compare(Object o1, Object o2) {
+                String e1 = (String) o1;
+                String e2 = (String) o2;
+                 if (e1 == null && e2 == null) {
+                    return 0; // Both are null, consider them equal
+                } else if (e1 == null) {
+                    return 1; // Null is greater than non-null
+                } else if (e2 == null) {
+                    return -1; // Non-null is greater than null
+                } else {
+                    return e1.compareTo(e2); // Compare non-null values
+                }
+                
+            }
+        }
+       
+       );
+    
     }
 }

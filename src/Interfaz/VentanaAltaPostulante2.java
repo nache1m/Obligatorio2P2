@@ -151,7 +151,8 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame implements Proper
 
        String [] experiencia = lstExperiencia.getSelectedValue().split("\\(");
        String nombreTematica = experiencia[0];
-       modelo.borrarTematicaYNivel(nombreTematica);
+       modelo.borrarExperiencia(nombreTematica, this.postulante);
+       lstExperiencia.setListData(modelo.darExperiencias(this.postulante));
     }//GEN-LAST:event_btnEliminar1ActionPerformed
 
     private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed

@@ -192,14 +192,14 @@ public class MenuVentanas extends javax.swing.JFrame {
         });
     }
    
-    @Override
-    protected void processWindowEvent(WindowEvent e) {
+   
+    /*protected void processWindowEvent(WindowEvent e) {
     if (e.getID() == WindowEvent.WINDOW_CLOSING) {
         guardarSistemaEnArchivo();
     }
     super.processWindowEvent(e);
 }
-
+*/
     //Método para persitir la ventana
     private void guardarSistemaEnArchivo() {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("salida"))) {
