@@ -10,7 +10,9 @@ import Dominio.Tematica;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.ListModel;
 
 /**
  *
@@ -156,6 +158,9 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame implements Proper
     }//GEN-LAST:event_btnEliminar1ActionPerformed
 
     private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
+        //Si apreta Cancelar Borra todo el progreso hecho hasta el moemento.
+        List<String> experienciasABorrar = lstExperiencia.getSelectedValuesList();
+        modelo.borrarTemas(experienciasABorrar, this.postulante);
         this.dispose();
     }//GEN-LAST:event_btnCancelar1ActionPerformed
 

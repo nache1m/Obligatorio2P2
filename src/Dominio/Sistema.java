@@ -115,13 +115,13 @@ public class Sistema implements Serializable {
                 String e1 = (String) o1;
                 String e2 = (String) o2;
                  if (e1 == null && e2 == null) {
-                    return 0; // Both are null, consider them equal
+                    return 0; 
                 } else if (e1 == null) {
-                    return 1; // Null is greater than non-null
+                    return 1; 
                 } else if (e2 == null) {
-                    return -1; // Non-null is greater than null
+                    return -1; 
                 } else {
-                    return e1.compareTo(e2); // Compare non-null values
+                    return e1.compareTo(e2);
                 }
                 
             }
@@ -129,5 +129,13 @@ public class Sistema implements Serializable {
        
        );
     
+    }
+    
+    public void borrarTemas(List<String> experienciasABorrar, Postulante p) {
+       for (String elem: experienciasABorrar) {
+          String elemento = elem.split("\\(")[0]; 
+          Tematica tema = p.obtenerTematicaPorNombre(elemento); 
+          p.getNivelYTemas().remove(tema);
+       }
     }
 }
