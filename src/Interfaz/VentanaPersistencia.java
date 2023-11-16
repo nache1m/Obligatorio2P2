@@ -9,10 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author elnac
- */
+
 public class VentanaPersistencia extends javax.swing.JFrame {
 
     public VentanaPersistencia() {
@@ -69,7 +66,7 @@ public class VentanaPersistencia extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
            try {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream("salida"));
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("salida.txt"));
             Sistema sistemaLeido = (Sistema) in.readObject();
             in.close();
 

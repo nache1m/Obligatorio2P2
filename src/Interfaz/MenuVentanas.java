@@ -5,8 +5,6 @@
 package Interfaz;
 
 import Dominio.Sistema;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -22,7 +20,7 @@ public class MenuVentanas extends javax.swing.JFrame {
     public MenuVentanas(Sistema miSistema) {
         initComponents();
         this.modelo = miSistema;
-        persistirAlCerrarVentana();
+        
     }
 
     /**
@@ -54,6 +52,11 @@ public class MenuVentanas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú Principal");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         menPostulantes.setText("Postulantes");
@@ -151,7 +154,7 @@ public class MenuVentanas extends javax.swing.JFrame {
     }//GEN-LAST:event_itmRegistroEntrevistaActionPerformed
 
     private void itmBajaPostulanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmBajaPostulanteActionPerformed
-        VentanaBajaPostulante v = new VentanaBajaPostulante();
+        VentanaBajaPostulante v = new VentanaBajaPostulante(this.modelo);
         v.setVisible(true);
     }//GEN-LAST:event_itmBajaPostulanteActionPerformed
 
@@ -163,6 +166,10 @@ public class MenuVentanas extends javax.swing.JFrame {
     private void menPostulantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menPostulantesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menPostulantesActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        guardarSistemaEnArchivo();
+    }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itmAltaPostulante;
@@ -183,26 +190,19 @@ public class MenuVentanas extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //Metodo para detectar el cierre de la ventana
-    private void persistirAlCerrarVentana() {
+   /* private void persistirAlCerrarVentana() {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 guardarSistemaEnArchivo();
             }
         });
-    }
+    }*/
    
    
-    /*protected void processWindowEvent(WindowEvent e) {
-    if (e.getID() == WindowEvent.WINDOW_CLOSING) {
-        guardarSistemaEnArchivo();
-    }
-    super.processWindowEvent(e);
-}
-*/
     //Método para persitir la ventana
     private void guardarSistemaEnArchivo() {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("salida"))) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("salida.txt"))) {
             out.writeObject(this.modelo);
             out.close();
         } catch (IOException ex) {

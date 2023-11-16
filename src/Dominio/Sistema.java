@@ -4,7 +4,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.*;
-import static java.util.Arrays.sort;
+
 
 public class Sistema implements Serializable {
     
@@ -73,8 +73,8 @@ public class Sistema implements Serializable {
 
     public void altaPostulante(Postulante nuevoPostulante) {
         ArrayList<Postulante> listaDesactualizada = new ArrayList<>(listaPostulantes);
-    listaPostulantes.add(nuevoPostulante);
-    manejador.firePropertyChange("listaPostulantes", listaDesactualizada, listaPostulantes);
+        listaPostulantes.add(nuevoPostulante);
+        manejador.firePropertyChange("listaPostulantes", listaDesactualizada, listaPostulantes);
 
     }
     
@@ -137,5 +137,23 @@ public class Sistema implements Serializable {
           Tematica tema = p.obtenerTematicaPorNombre(elemento); 
           p.getNivelYTemas().remove(tema);
        }
+    }
+
+    public void borrarPostulante(Postulante p) {
+        ArrayList<Postulante> copiaListaPostulantes = new ArrayList<>(this.listaPostulantes);
+        for (Postulante elem: copiaListaPostulantes) {
+            if(elem.equals(p)) {
+                this.listaPostulantes.remove(p);
+            }
+        }
+        ArrayList<Entrevista> copiaListaEntrevistas = new ArrayList<>();
+        for (Entrevista E: copiaListaEntrevistas) {
+            if(E.getPostulante().equals(p)) {
+                this.listaEntrevistas.remove(E);
+            }
+        
+        }
+     manejador.firePropertyChange("listaPostulantes", copiaListaPostulantes, listaPostulantes);
+     manejador.firePropertyChange("listaEntrevistas", copiaListaEntrevistas, listaEntrevistas);
     }
 }

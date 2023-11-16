@@ -4,17 +4,23 @@
  */
 package Interfaz;
 
+import Dominio.Postulante;
+import Dominio.Sistema;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 /**
  *
  * @author elnac
  */
-public class VentanaBajaPostulante extends javax.swing.JFrame {
+public class VentanaBajaPostulante extends javax.swing.JFrame implements PropertyChangeListener {
 
-    /**
-     * Creates new form VentanaBajaPostulante
-     */
-    public VentanaBajaPostulante() {
+   private Sistema modelo;
+   
+    public VentanaBajaPostulante(Sistema miDominio) {
         initComponents();
+        this.modelo = miDominio;
+        lstPostulantes.setListData(modelo.getListaPostulantes().toArray());
+        modelo.agregarEscuchas(this);
     }
 
     /**
@@ -28,7 +34,7 @@ public class VentanaBajaPostulante extends javax.swing.JFrame {
 
         lblBajaPostulante = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        lstPostulantes = new javax.swing.JList();
         btnEliminar = new javax.swing.JButton();
         btnCancelar1 = new javax.swing.JButton();
 
@@ -42,7 +48,7 @@ public class VentanaBajaPostulante extends javax.swing.JFrame {
         getContentPane().add(lblBajaPostulante);
         lblBajaPostulante.setBounds(120, 20, 140, 16);
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(lstPostulantes);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(70, 60, 250, 130);
@@ -70,7 +76,11 @@ public class VentanaBajaPostulante extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        this.dispose();
+        Postulante p = (Postulante)lstPostulantes.getSelectedValue();
+        this.modelo.borrarPostulante(p);
+        lstPostulantes.setListData(modelo.getListaPostulantes().toArray());
+        
+        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
@@ -81,8 +91,13 @@ public class VentanaBajaPostulante extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar1;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBajaPostulante;
+    private javax.swing.JList lstPostulantes;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+         lstPostulantes.setListData(modelo.getListaPostulantes().toArray());
+    }
 }

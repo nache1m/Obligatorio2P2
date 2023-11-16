@@ -95,11 +95,6 @@ public class Postulante extends Persona implements Serializable {
 
         return super.getNombre();
     }
-
-    public void agregarTemaTemporal(Tematica tema, int nivel1) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
  
 
     public Tematica obtenerTematicaPorNombre(String elem) {
