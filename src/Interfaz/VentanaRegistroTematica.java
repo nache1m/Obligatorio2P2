@@ -42,6 +42,7 @@ public class VentanaRegistroTematica extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro de Temática");
+        setResizable(false);
         getContentPane().setLayout(null);
 
         pnlPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -89,7 +90,7 @@ public class VentanaRegistroTematica extends javax.swing.JFrame {
         getContentPane().add(pnlPanel);
         pnlPanel.setBounds(30, 20, 340, 260);
 
-        setSize(new java.awt.Dimension(414, 307));
+        setSize(new java.awt.Dimension(414, 333));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

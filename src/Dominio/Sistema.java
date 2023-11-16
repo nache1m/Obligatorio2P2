@@ -61,6 +61,12 @@ public class Sistema implements Serializable {
         this.getListaEvaluadores().add(ev);
     }
     
+    public void agregarEntrevista(Entrevista ent){
+        ArrayList <Entrevista> lista = new ArrayList<>(listaEntrevistas);
+        this.listaEntrevistas.add(ent);
+        manejador.firePropertyChange("listaEntrevistas", lista, listaEntrevistas);
+    }
+    
     public void agregarTematica (Tematica tema) {
         ArrayList <Tematica> listaTemaVieja = new ArrayList<>(listaTematicas);
         this.listaTematicas.add(tema);

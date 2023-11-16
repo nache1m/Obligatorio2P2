@@ -40,6 +40,7 @@ public class VentanaBajaPostulante extends javax.swing.JFrame implements Propert
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Baja Postulante");
+        setResizable(false);
         getContentPane().setLayout(null);
 
         lblBajaPostulante.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -71,7 +72,7 @@ public class VentanaBajaPostulante extends javax.swing.JFrame implements Propert
         getContentPane().add(btnCancelar1);
         btnCancelar1.setBounds(70, 210, 80, 23);
 
-        setSize(new java.awt.Dimension(389, 275));
+        setSize(new java.awt.Dimension(389, 289));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

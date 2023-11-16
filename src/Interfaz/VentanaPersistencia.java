@@ -26,6 +26,7 @@ public class VentanaPersistencia extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(null);
 
         pnlPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -56,7 +57,7 @@ public class VentanaPersistencia extends javax.swing.JFrame {
         getContentPane().add(pnlPanel);
         pnlPanel.setBounds(30, 20, 340, 190);
 
-        setSize(new java.awt.Dimension(410, 236));
+        setSize(new java.awt.Dimension(410, 257));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

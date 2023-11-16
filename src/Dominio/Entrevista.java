@@ -41,6 +41,13 @@ public class Entrevista implements Serializable {
     
     // Constructor.
     
+    public Entrevista (Evaluador ev, Postulante post, int puntaje, String com){
+        this.evaluador = ev;
+        this.postulante = post;
+        this.puntaje = puntaje;
+        this.comentarios = com;
+    }
+    
     // Metodos.
     
 }

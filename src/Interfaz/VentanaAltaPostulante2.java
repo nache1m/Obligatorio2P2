@@ -59,6 +59,7 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame implements Proper
         setAlwaysOnTop(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(java.awt.Color.white);
+        setResizable(false);
         getContentPane().setLayout(null);
 
         lblExperiencia.setText("Experiencia:");
@@ -126,7 +127,7 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame implements Proper
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(130, 130, 210, 80);
 
-        setSize(new java.awt.Dimension(398, 283));
+        setSize(new java.awt.Dimension(398, 299));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

@@ -42,6 +42,7 @@ public class VentanaRegistroEvaluador extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro Evaluador");
+        setResizable(false);
         getContentPane().setLayout(null);
 
         lblNombre1.setText("Nombre:");
@@ -54,7 +55,7 @@ public class VentanaRegistroEvaluador extends javax.swing.JFrame {
 
         lblAño.setText("Año de ingreso:");
         getContentPane().add(lblAño);
-        lblAño.setBounds(60, 206, 100, 30);
+        lblAño.setBounds(60, 200, 100, 20);
 
         lblDireccion1.setText("Direccion:");
         getContentPane().add(lblDireccion1);
@@ -66,7 +67,7 @@ public class VentanaRegistroEvaluador extends javax.swing.JFrame {
         getContentPane().add(lblAltaPostulante);
         lblAltaPostulante.setBounds(140, 20, 120, 16);
         getContentPane().add(txtAño);
-        txtAño.setBounds(180, 210, 160, 22);
+        txtAño.setBounds(180, 200, 160, 22);
         getContentPane().add(txtNombre);
         txtNombre.setBounds(180, 80, 160, 22);
         getContentPane().add(txtCedula);
@@ -92,7 +93,7 @@ public class VentanaRegistroEvaluador extends javax.swing.JFrame {
         getContentPane().add(btnSiguiente);
         btnSiguiente.setBounds(260, 260, 80, 23);
 
-        setSize(new java.awt.Dimension(414, 307));
+        setSize(new java.awt.Dimension(414, 351));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

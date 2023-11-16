@@ -52,6 +52,7 @@ public class MenuVentanas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú Principal");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -150,7 +151,8 @@ public class MenuVentanas extends javax.swing.JFrame {
     }//GEN-LAST:event_itmAltaPostulanteActionPerformed
 
     private void itmRegistroEntrevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmRegistroEntrevistaActionPerformed
-        // TODO add your handling code here:
+        VentanaEntrevistas v = new VentanaEntrevistas(modelo);
+        v.setVisible(true);
     }//GEN-LAST:event_itmRegistroEntrevistaActionPerformed
 
     private void itmBajaPostulanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmBajaPostulanteActionPerformed
