@@ -9,6 +9,7 @@ import Dominio.Sistema;
 import Dominio.Tematica;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 /**
@@ -18,11 +19,14 @@ import javax.swing.ListModel;
 public class VentanaRegistroPuesto extends javax.swing.JFrame {
 
     private Sistema modelo;
+    private ArrayList<Tematica> temasRequeridos = new ArrayList();
+    private ArrayList<Tematica> listaTemasDisponibles;
 
     public VentanaRegistroPuesto(Sistema miModelo) {
         this.modelo = miModelo;
-        lstTemas.setListData(modelo.getListaTematicas().toArray());
         initComponents();
+        lstTemas.setListData(modelo.getListaTematicas().toArray());
+        listaTemasDisponibles = modelo.getListaTematicas();
     }
 
     /**
@@ -187,16 +191,17 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame {
             tematicasRequeridas.add(tematica);
         }
         Puesto p = new Puesto (nombre, tipoDeTrabajo, tematicasRequeridas);
+         JOptionPane.showMessageDialog(null, "El puesto se ha creado satisfactoriamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+         this.dispose();
     }//GEN-LAST:event_btnRegistrar1ActionPerformed
 
     private void btnSumarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSumarActionPerformed
-        ArrayList<Tematica> lista = modelo.getListaTematicas();
-        ArrayList<Tematica> requeridos = new ArrayList();
+
         Tematica tema = (Tematica) lstTemas.getSelectedValue();
-        requeridos.add(tema);
-        lista.remove(tema);
-        lstTemasRequeridos.setListData(requeridos.toArray());
-        lstTemas.setListData(lista.toArray());
+        temasRequeridos.add(tema);
+        listaTemasDisponibles.remove(tema);
+        lstTemasRequeridos.setListData(temasRequeridos.toArray());
+        lstTemas.setListData(listaTemasDisponibles.toArray());
     }//GEN-LAST:event_btnSumarActionPerformed
 
     private void rbtnRemotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnRemotoActionPerformed

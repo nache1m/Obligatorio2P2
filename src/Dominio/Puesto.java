@@ -41,4 +41,7 @@ public class Puesto implements Serializable {
         this.temas = lista;
     }
     // Metodos.
+    public String toString() {
+        return this.getNombre();
+    }
 }
