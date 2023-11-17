@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -8,17 +8,21 @@ import Dominio.Entrevista;
 import Dominio.Evaluador;
 import Dominio.Postulante;
 import Dominio.Sistema;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author elnac
  */
-public class VentanaEntrevistas extends javax.swing.JFrame {
+public class VentanaEntrevistas extends javax.swing.JFrame implements PropertyChangeListener{
     private Sistema modelo;
     
     public VentanaEntrevistas(Sistema miDominio) {
         this.modelo = miDominio;
         initComponents();
+        modelo.agregarEscuchas(this);
         lstPostulantes.setListData(modelo.getListaPostulantes().toArray());
         lstEvaluadores.setListData(modelo.getListaEvaluadores().toArray());
     }
@@ -128,6 +132,7 @@ public class VentanaEntrevistas extends javax.swing.JFrame {
         modelo.agregarEntrevista(ent);
         spnPuntaje.setValue(0);
         txtComent.setText("");
+        JOptionPane.showMessageDialog(null, "La entrevista fue agregada", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnIngresarActionPerformed
 
 
@@ -147,4 +152,10 @@ public class VentanaEntrevistas extends javax.swing.JFrame {
     private javax.swing.JSpinner spnPuntaje;
     private javax.swing.JTextArea txtComent;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        lstPostulantes.setListData(modelo.getListaPostulantes().toArray());
+        lstEvaluadores.setListData(modelo.getListaEvaluadores().toArray());
+    }
 }

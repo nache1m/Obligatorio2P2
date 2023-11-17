@@ -58,7 +58,11 @@ public class Sistema implements Serializable {
     }
     
     public void agregarEvaluador(Evaluador ev){
+        ArrayList <Evaluador> listaE = new ArrayList<>(this.listaEvaluadores);
         this.getListaEvaluadores().add(ev);
+        manejador.firePropertyChange("listaEvaluadores", listaE, listaEvaluadores);
+        
+        
     }
     
     public void agregarEntrevista(Entrevista ent){
@@ -143,6 +147,9 @@ public class Sistema implements Serializable {
           Tematica tema = p.obtenerTematicaPorNombre(elemento); 
           p.getNivelYTemas().remove(tema);
        }
+       ArrayList<Postulante> copiaListaPostulantes = new ArrayList<>(this.listaPostulantes);
+       this.listaPostulantes.remove(p);
+       manejador.firePropertyChange("listaPostulantes", copiaListaPostulantes, listaPostulantes);
     }
 
     public void borrarPostulante(Postulante p) {
