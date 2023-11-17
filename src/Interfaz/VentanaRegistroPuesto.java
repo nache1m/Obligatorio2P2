@@ -76,7 +76,7 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtNombre);
-        txtNombre.setBounds(140, 60, 210, 22);
+        txtNombre.setBounds(110, 60, 240, 22);
 
         lblNombre1.setText("Nombre:");
         getContentPane().add(lblNombre1);
@@ -135,7 +135,7 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rbtnRemoto);
-        rbtnRemoto.setBounds(280, 110, 65, 21);
+        rbtnRemoto.setBounds(280, 110, 90, 21);
 
         rbtnPresencial.setText("Presencial");
         rbtnPresencial.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +144,7 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rbtnPresencial);
-        rbtnPresencial.setBounds(140, 110, 76, 21);
+        rbtnPresencial.setBounds(110, 110, 90, 21);
 
         rbtnMixto.setText("Mixto");
         rbtnMixto.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +153,7 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame {
             }
         });
         getContentPane().add(rbtnMixto);
-        rbtnMixto.setBounds(220, 110, 54, 21);
+        rbtnMixto.setBounds(210, 110, 70, 21);
 
         setSize(new java.awt.Dimension(419, 440));
         setLocationRelativeTo(null);
@@ -191,8 +191,9 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame {
             tematicasRequeridas.add(tematica);
         }
         Puesto p = new Puesto (nombre, tipoDeTrabajo, tematicasRequeridas);
-         JOptionPane.showMessageDialog(null, "El puesto se ha creado satisfactoriamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-         this.dispose();
+        this.modelo.agregarPuesto(p);
+        JOptionPane.showMessageDialog(null, "El puesto se ha creado satisfactoriamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
     }//GEN-LAST:event_btnRegistrar1ActionPerformed
 
     private void btnSumarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSumarActionPerformed

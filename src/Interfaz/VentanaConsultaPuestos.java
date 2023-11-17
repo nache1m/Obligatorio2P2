@@ -4,17 +4,26 @@
  */
 package Interfaz;
 
+import Dominio.Postulante;
+import Dominio.Puesto;
+import Dominio.Sistema;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+
 /**
  *
  * @author 59891
  */
-public class VentanaConsultaPuestos extends javax.swing.JFrame {
+public class VentanaConsultaPuestos extends javax.swing.JFrame implements PropertyChangeListener {
 
-    /**
-     * Creates new form VentanaConsultaPuestos1
-     */
-    public VentanaConsultaPuestos() {
+   private Sistema modelo;
+   
+    public VentanaConsultaPuestos(Sistema miModelo) {
+        this.modelo = miModelo;
         initComponents();
+        modelo.agregarEscuchas(this);
+        lstPuestos.setListData(modelo.getListaPuestos().toArray());
     }
 
     /**
@@ -54,6 +63,11 @@ public class VentanaConsultaPuestos extends javax.swing.JFrame {
         jLabel3.setText("Nivel:");
 
         btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Postulantes:");
 
@@ -130,41 +144,14 @@ public class VentanaConsultaPuestos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaConsultaPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaConsultaPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaConsultaPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaConsultaPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        Puesto p = (Puesto) lstPuestos.getSelectedValue();
+        int nivel = (int) spnNivel.getValue();
+        ArrayList <Postulante> pstCumplen = this.modelo.listaPostulantesParaPuesto(p, nivel);
+        lstPostulantes.setListData(pstCumplen.toArray());
+        
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaConsultaPuestos().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -181,4 +168,9 @@ public class VentanaConsultaPuestos extends javax.swing.JFrame {
     private javax.swing.JList lstPuestos;
     private javax.swing.JSpinner spnNivel;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        lstPuestos.setListData(modelo.getListaPuestos().toArray());
+    }
 }
