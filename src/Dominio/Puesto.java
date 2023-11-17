@@ -35,6 +35,10 @@ public class Puesto implements Serializable {
     }
     
     // Constructor.
-    
+    public Puesto (String nombre, int tipo, ArrayList<Tematica> lista){
+        this.nombre =  nombre;
+        this.tipo = tipo;
+        this.temas = lista;
+    }
     // Metodos.
 }
