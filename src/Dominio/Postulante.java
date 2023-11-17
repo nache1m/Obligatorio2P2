@@ -2,6 +2,7 @@ package Dominio;
 
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.net.URL;
 import java.util.*;
 
 public class Postulante extends Persona implements Serializable {
@@ -53,7 +54,7 @@ public class Postulante extends Persona implements Serializable {
     }
 
     //Constructor sin Tematica y Nivel
-    public Postulante(String nombre, String cedula, String telefono, String email, String linkedIn, int tipoTrabajo) {
+    public Postulante(String nombre, String cedula, String telefono, String linkedIn, String email, int tipoTrabajo) {
         super.setNombre(nombre);
         super.setCedula(cedula);
         this.telefono = telefono;

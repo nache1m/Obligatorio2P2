@@ -1,6 +1,10 @@
 package Interfaz;
 
+import Dominio.Entrevista;
+import Dominio.Evaluador;
+import Dominio.Postulante;
 import Dominio.Sistema;
+import Dominio.Tematica;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,7 +12,6 @@ import java.io.ObjectInputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 
 public class VentanaPersistencia extends javax.swing.JFrame {
 
@@ -66,7 +69,7 @@ public class VentanaPersistencia extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-           try {
+        try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("salida.txt"));
             Sistema sistemaLeido = (Sistema) in.readObject();
             in.close();
@@ -90,22 +93,37 @@ public class VentanaPersistencia extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Se creará un nuevo sistema", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             this.crearModeloDesdeCero();
         }
-    
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-
     public void crearModeloDesdeCero() {
-    Sistema modelo = new Sistema();
-         
-    MenuVentanas menu = new MenuVentanas(modelo);
+        Sistema modelo = new Sistema();
 
-    menu.setVisible (
-    true);
-         
+        MenuVentanas menu = new MenuVentanas(modelo);
 
-    this.setVisible(
+        menu.setVisible(true);
 
-false);
+        this.setVisible(false);
+        Tematica Java = new Tematica ("Java", "Útil para backend");
+        Tematica React = new Tematica ("React", "Útil para FrontEnd");
+        Tematica HTML = new Tematica ("HTML", "No es un lenguaje de programación");
+        Postulante Nacho = new Postulante("Nacho", "2.222.222-7", "099123456", "nacheim@gmail.com", "https://www.linkedin.comm/in/nacheim", 2);
+        Postulante Eze = new Postulante("Eze", "5.064.910-7 ", "091219658", "ezequielpepedemonte@gmail.com", "https://www.linkedin.comm/in/ezepepedemonte", 1); 
+        Evaluador e1 = new Evaluador("Alejandro", "9.999.999-9", "Gaboto 1461", "1997");
+        Evaluador e2 = new Evaluador("Seba", "7.799.799-2", "Gaboto 2010", "2010");
+        Entrevista entre1 = new Entrevista(e1, Eze, 10, "Sirve para backend");
+        Entrevista entre2 = new Entrevista(e2, Nacho, 10, "Sirve para frontend");
+        Entrevista entre3 = new Entrevista(e2, Eze, 8, "Sirve para support");
+        modelo.agregarTematica(HTML);
+        modelo.agregarTematica(Java);
+        modelo.agregarTematica(React);
+        modelo.altaPostulante(Eze);
+        modelo.altaPostulante(Nacho);
+        modelo.agregarEvaluador(e1);
+        modelo.agregarEvaluador(e2);
+        modelo.agregarEntrevista(entre1);
+        modelo.agregarEntrevista(entre2);
+        modelo.agregarEntrevista(entre3);
     }
 
 
@@ -116,6 +134,4 @@ false);
     private javax.swing.JPanel pnlPanel;
     // End of variables declaration//GEN-END:variables
 
-
-   
 }
