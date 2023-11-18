@@ -97,7 +97,7 @@ public class Postulante extends Persona implements Serializable {
 
     public String toString() {
 
-        return super.getNombre();
+        return super.getNombre() + "("+this.getCedula()+")";
     }
 
     public Tematica obtenerTematicaPorNombre(String elem) {

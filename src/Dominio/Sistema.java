@@ -138,6 +138,17 @@ public class Sistema implements Serializable {
         );
 
     }
+    
+    public void ordenarPostulantesPorCedula() {
+        if (listaPostulantes != null) {
+            Collections.sort(listaPostulantes, new Comparator<Postulante>() {
+                @Override
+                public int compare(Postulante p1, Postulante p2) {
+                    return p1.getCedula().compareTo(p2.getCedula());
+                }
+            });
+        }
+    }
 
     public void borrarTemas(List<String> experienciasABorrar, Postulante p) {
         for (String elem : experienciasABorrar) {

@@ -9,6 +9,7 @@ public class Entrevista implements Serializable {
     private Postulante postulante;
     private int puntaje;
     private String comentarios;
+    private static int contadorIds = 1;
 
     // Getters y Setters.
     public int getId() {
@@ -42,10 +43,12 @@ public class Entrevista implements Serializable {
     // Constructor.
     
     public Entrevista (Evaluador ev, Postulante post, int puntaje, String com){
+        this.id = contadorIds;
         this.evaluador = ev;
         this.postulante = post;
         this.puntaje = puntaje;
         this.comentarios = com;
+        contadorIds++;
     }
     
     // Metodos.

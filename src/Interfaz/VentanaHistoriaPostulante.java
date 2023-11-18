@@ -1,7 +1,11 @@
 package Interfaz;
 
+import Dominio.Entrevista;
 import Dominio.Postulante;
 import Dominio.Sistema;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class VentanaHistoriaPostulante extends javax.swing.JFrame {
 
@@ -10,6 +14,7 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame {
     public VentanaHistoriaPostulante(Sistema miModelo) {
         initComponents();
         this.modelo = miModelo;
+        modelo.ordenarPostulantesPorCedula();
         lstPostulantes.setListData(modelo.getListaPostulantes().toArray());
         lstPostulantes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -31,9 +36,26 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame {
                         }
                     }
                     lstExperiencia.setListData(modelo.darExperiencias(p));
+                    cargarTabla(p);
                 }
             }
         });
+    }
+
+    public void cargarTabla(Postulante p) {
+        ArrayList<Entrevista> listaEntrevistas = new ArrayList();
+        for (Entrevista miEntrevista : modelo.getListaEntrevistas()) {
+            if (miEntrevista.getPostulante().equals(p)) {
+                listaEntrevistas.add(miEntrevista);
+            }
+        }
+        DefaultTableModel modelo = (DefaultTableModel) tblEntrevistas.getModel();
+        modelo.setRowCount(0);
+        for (int i = 1; i < listaEntrevistas.size(); i++) {
+            Entrevista e = listaEntrevistas.get(i);
+            modelo.addRow(new Object[]{i, e.getEvaluador(), e.getPuntaje(), e.getComentarios()});
+        }
+        tblEntrevistas.setModel(modelo);
     }
 
     @SuppressWarnings("unchecked")
@@ -46,7 +68,7 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame {
         lstPostulantes = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblEntrevistas = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -93,13 +115,10 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(370, 290, 70, 16);
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblEntrevistas.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        tblEntrevistas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Nro", "Evaluador", "Puntaje", "Comentarios"
@@ -120,20 +139,22 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jScrollPane2.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(200);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(500);
+        tblEntrevistas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tblEntrevistas.getTableHeader().setResizingAllowed(false);
+        tblEntrevistas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tblEntrevistas);
+        if (tblEntrevistas.getColumnModel().getColumnCount() > 0) {
+            tblEntrevistas.getColumnModel().getColumn(0).setResizable(false);
+            tblEntrevistas.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tblEntrevistas.getColumnModel().getColumn(1).setResizable(false);
+            tblEntrevistas.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tblEntrevistas.getColumnModel().getColumn(2).setResizable(false);
+            tblEntrevistas.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tblEntrevistas.getColumnModel().getColumn(3).setResizable(false);
+            tblEntrevistas.getColumnModel().getColumn(3).setPreferredWidth(498);
         }
-        jTable1.getAccessibleContext().setAccessibleName("");
-        jTable1.getAccessibleContext().setAccessibleDescription("");
+        tblEntrevistas.getAccessibleContext().setAccessibleName("");
+        tblEntrevistas.getAccessibleContext().setAccessibleDescription("");
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(50, 490, 850, 160);
@@ -221,7 +242,6 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBajaPostulante;
     private javax.swing.JLabel lblCedula;
     private javax.swing.JLabel lblDireccion;
@@ -233,6 +253,7 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame {
     private javax.swing.JLabel lblTelefono;
     private javax.swing.JList lstExperiencia;
     private javax.swing.JList lstPostulantes;
+    private javax.swing.JTable tblEntrevistas;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }
