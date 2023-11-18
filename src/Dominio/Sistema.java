@@ -44,7 +44,15 @@ public class Sistema implements Serializable {
         listaTematicas = new ArrayList();
         manejador = new PropertyChangeSupport(this);
     }
-
+    public Sistema( Respaldo miRespaldo) { 
+        listaPostulantes = new ArrayList(miRespaldo.getListaPostulantes());
+        listaEvaluadores = new ArrayList(miRespaldo.getListaEvaluadores());
+        listaPuestos = new ArrayList(miRespaldo.getListaPuestos());
+        listaEntrevistas = new ArrayList(miRespaldo.getListaEntrevistas());
+        listaTematicas = new ArrayList(miRespaldo.getListaTematicas());
+        manejador = new PropertyChangeSupport(this);
+        
+    }
     // Metodos.
     public boolean tematicaRepetida(String nombre) {
         ArrayList<Tematica> lista = this.listaTematicas;

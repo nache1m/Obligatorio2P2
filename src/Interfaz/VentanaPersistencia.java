@@ -3,6 +3,7 @@ package Interfaz;
 import Dominio.Entrevista;
 import Dominio.Evaluador;
 import Dominio.Postulante;
+import Dominio.Respaldo;
 import Dominio.Sistema;
 import Dominio.Tematica;
 import java.io.FileInputStream;
@@ -71,7 +72,7 @@ public class VentanaPersistencia extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("salida"));
-            Sistema sistemaLeido = (Sistema) in.readObject();
+            Sistema sistemaLeido = new Sistema ((Respaldo)in.readObject()) ;
             in.close();
 
             MenuVentanas menu = new MenuVentanas(sistemaLeido);

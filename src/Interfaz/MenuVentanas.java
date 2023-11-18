@@ -4,6 +4,7 @@
  */
 package Interfaz;
 
+import Dominio.Respaldo;
 import Dominio.Sistema;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -221,21 +222,14 @@ public class MenuVentanas extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 
-    //Metodo para detectar el cierre de la ventana
-   /* private void persistirAlCerrarVentana() {
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                guardarSistemaEnArchivo();
-            }
-        });
-    }*/
-   
+
    
     //Método para persitir la ventana
     private void guardarSistemaEnArchivo() {
+        
+        Respaldo miRespaldo = new Respaldo(this.modelo);
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("salida"))) {
-            out.writeObject(this.modelo);
+            out.writeObject(miRespaldo);
             out.close();
         } catch (IOException ex) {
             ex.printStackTrace();
