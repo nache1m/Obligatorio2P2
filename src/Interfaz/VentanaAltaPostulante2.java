@@ -12,6 +12,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.ListModel;
 
 /**
@@ -136,13 +137,14 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame implements Proper
     }//GEN-LAST:event_cbTemaActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        
         this.dispose();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
         //agregarTryandCatch y clase throwable
         int nivel1 =  Integer.parseInt(String.valueOf(spinNivel.getValue()));
-        Tematica tema = (Tematica )cbTema.getSelectedItem();
+        Tematica tema = (Tematica)cbTema.getSelectedItem();
         this.postulante.agregarTema(tema, nivel1);
         spinNivel.setValue(0);
         cbTema.setSelectedIndex(0);
@@ -160,7 +162,7 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame implements Proper
     private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
         //Si apreta Cancelar Borra todo el progreso hecho hasta el moemento.
         List<String> experienciasABorrar = lstExperiencia.getSelectedValuesList();
-        modelo.borrarTemas(experienciasABorrar, this.postulante);
+        this.borrarTemas(experienciasABorrar, this.postulante);
         this.dispose();
     }//GEN-LAST:event_btnCancelar1ActionPerformed
 
@@ -192,5 +194,16 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame implements Proper
     public void propertyChange(PropertyChangeEvent evt) {
         lstExperiencia.setListData(modelo.darExperiencias(this.postulante));
         agregarTemasAlCombo(cbTema, modelo.getListaTematicas());
+    }
+    
+ public void borrarTemas(List<String> experienciasABorrar, Postulante p) {
+        for (String elem : experienciasABorrar) {
+            String elemento = elem.split("\\(")[0];
+            Tematica tema = p.obtenerTematicaPorNombre(elemento);
+            p.getNivelYTemas().remove(tema);
+        }
+        ArrayList<Postulante> copiaListaPostulantes = new ArrayList<>(this.modelo.getListaPostulantes());
+        this.modelo.getListaPostulantes().remove(p);
+        this.modelo.getManejador().firePropertyChange("listaPostulantes", copiaListaPostulantes, this.modelo.getListaPostulantes());
     }
 }

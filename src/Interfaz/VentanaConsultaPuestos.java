@@ -4,26 +4,28 @@
  */
 package Interfaz;
 
+import Dominio.ArchivosLectura.ArchivoGrabacion;
 import Dominio.Postulante;
 import Dominio.Puesto;
 import Dominio.Sistema;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 
-/**
- *
- * @author 59891
- */
 public class VentanaConsultaPuestos extends javax.swing.JFrame implements PropertyChangeListener {
 
-   private Sistema modelo;
-   
+    private Sistema modelo;
+    private boolean ag = false;
     public VentanaConsultaPuestos(Sistema miModelo) {
         this.modelo = miModelo;
         initComponents();
         modelo.agregarEscuchas(this);
         lstPuestos.setListData(modelo.getListaPuestos().toArray());
+
     }
 
     /**
@@ -45,7 +47,7 @@ public class VentanaConsultaPuestos extends javax.swing.JFrame implements Proper
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        lstPostulantes = new javax.swing.JList();
+        lstPostulantes = new javax.swing.JList<>();
         btnCancelar = new javax.swing.JButton();
         btnExportar = new javax.swing.JButton();
 
@@ -152,13 +154,16 @@ public class VentanaConsultaPuestos extends javax.swing.JFrame implements Proper
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         Puesto p = (Puesto) lstPuestos.getSelectedValue();
         int nivel = (int) spnNivel.getValue();
-        ArrayList <Postulante> pstCumplen = modelo.ordenarPostulantesPorEntrevista(this.modelo.listaPostulantesParaPuesto(p, nivel));
+        ArrayList<Postulante> pstCumplen = modelo.ordenarPostulantesPorEntrevista(this.modelo.listaPostulantesParaPuesto(p, nivel));
         lstPostulantes.setListData(modelo.doyArrayListConMasDatos(pstCumplen));
-        
+
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
-      //Código botón registrar
+        ListModel<String> misStrings = lstPostulantes.getModel();
+        Puesto p = (Puesto) lstPuestos.getSelectedValue();
+        this.grabarArchivo("Consulta.txt", misStrings, p);
+        JOptionPane.showMessageDialog(null, "La información fue exportada con éxito", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnExportarActionPerformed
 
 
@@ -173,7 +178,7 @@ public class VentanaConsultaPuestos extends javax.swing.JFrame implements Proper
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JList lstPostulantes;
+    private javax.swing.JList<String> lstPostulantes;
     private javax.swing.JList lstPuestos;
     private javax.swing.JSpinner spnNivel;
     // End of variables declaration//GEN-END:variables
@@ -182,4 +187,23 @@ public class VentanaConsultaPuestos extends javax.swing.JFrame implements Proper
     public void propertyChange(PropertyChangeEvent evt) {
         lstPuestos.setListData(modelo.getListaPuestos().toArray());
     }
+
+     public void grabarArchivo (String miArchivo, ListModel<String> misPostulantes, Puesto p) {
+        ArchivoGrabacion arch = new ArchivoGrabacion (miArchivo, this.ag);
+        this.setag(true); // Luego de usar el método la primera vez siempre le voy a pasar un valor true para que siga extendiendo el archivo en vez de hacer uno nuevo
+        arch.grabarLinea(p.getNombre());
+        System.out.println(p.getNombre());
+        for (int i = 0; i < misPostulantes.getSize(); i++) {   
+            String [] res = misPostulantes.getElementAt(i).split(" \\s*/\\s*");
+            String txt = res[0] + " / " + res[1] + " / " + res[2];
+            arch.grabarLinea(txt);
+        }
+        arch.cerrar();
+        
+    }
+
+    private void setag(boolean b) {
+       this.ag = b;
+    }
+
 }

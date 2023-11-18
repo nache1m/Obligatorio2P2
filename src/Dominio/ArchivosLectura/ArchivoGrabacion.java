@@ -1,3 +1,5 @@
+package Dominio.ArchivosLectura;
+
 
 import java.io.*;
 import java.util.Formatter;

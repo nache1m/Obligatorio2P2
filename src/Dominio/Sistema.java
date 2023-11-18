@@ -260,4 +260,10 @@ public class Sistema implements Serializable {
         return res;
 
     }
+
+    
+
+    public PropertyChangeSupport getManejador() {
+       return this.manejador;
+    }
 }
