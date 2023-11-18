@@ -1,11 +1,13 @@
 package Interfaz;
 
+import Dominio.ArchivosLectura.ResaltadorColores;
 import Dominio.Entrevista;
 import Dominio.Postulante;
 import Dominio.Sistema;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 public class VentanaHistoriaPostulante extends javax.swing.JFrame {
 
@@ -58,7 +60,18 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame {
         tblEntrevistas.setModel(modelo);
     }
 
-    @SuppressWarnings("unchecked")
+    public void resaltarPalabraEnComentarios(String palabraBuscada) {
+        ResaltadorColores r = new ResaltadorColores();
+        for (Entrevista entrevista : modelo.getListaEntrevistas()) {
+            String comentario = entrevista.getComentarios();
+            if (entrevista.getComentarios().contains(palabraBuscada)){
+                r.setPalabraBuscada(palabraBuscada);
+            }
+            tblEntrevistas.getColumnModel().getColumn(3).setCellRenderer(r);
+            tblEntrevistas.repaint();
+        }
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -205,26 +218,36 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame {
         btnLimpiar.setBounds(570, 440, 90, 23);
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnBuscar);
         btnBuscar.setBounds(460, 440, 90, 23);
         getContentPane().add(lblCedula);
-        lblCedula.setBounds(450, 110, 210, 20);
+        lblCedula.setBounds(450, 110, 230, 20);
         getContentPane().add(lblNombre);
-        lblNombre.setBounds(450, 80, 210, 20);
+        lblNombre.setBounds(450, 80, 230, 20);
         getContentPane().add(lblTelefono);
-        lblTelefono.setBounds(450, 170, 210, 20);
+        lblTelefono.setBounds(450, 170, 230, 20);
         getContentPane().add(lblDireccion);
-        lblDireccion.setBounds(450, 140, 210, 20);
+        lblDireccion.setBounds(450, 140, 230, 20);
         getContentPane().add(lblMail);
-        lblMail.setBounds(450, 200, 210, 20);
+        lblMail.setBounds(450, 200, 230, 20);
         getContentPane().add(lblFormato);
-        lblFormato.setBounds(450, 260, 210, 20);
+        lblFormato.setBounds(450, 260, 230, 20);
         getContentPane().add(lblLinkedin);
-        lblLinkedin.setBounds(450, 230, 210, 20);
+        lblLinkedin.setBounds(450, 230, 310, 20);
 
         setSize(new java.awt.Dimension(971, 696));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String palabra = txtBuscar.getText();
+        resaltarPalabraEnComentarios(palabra);
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
