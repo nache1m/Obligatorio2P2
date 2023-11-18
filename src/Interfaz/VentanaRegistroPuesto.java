@@ -26,7 +26,7 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame {
         this.modelo = miModelo;
         initComponents();
         lstTemas.setListData(modelo.getListaTematicas().toArray());
-        listaTemasDisponibles = modelo.getListaTematicas();
+        listaTemasDisponibles = new ArrayList (modelo.getListaTematicas());
     }
 
     /**

@@ -1,3 +1,5 @@
+//Postulante
+
 package Dominio;
 
 import java.beans.PropertyChangeSupport;
@@ -12,6 +14,7 @@ public class Postulante extends Persona implements Serializable {
     private String linkedIn;
     private int tipoTrabajo;
     private HashMap<Tematica, Integer> nivelYTemas = new HashMap<>();
+
     // Getters y Setters.
     public String getTelefono() {
         return telefono;
@@ -96,10 +99,9 @@ public class Postulante extends Persona implements Serializable {
 
         return super.getNombre();
     }
- 
 
     public Tematica obtenerTematicaPorNombre(String elem) {
-        ArrayList <Tematica> tematicas = this.obtenerTematicas();
+        ArrayList<Tematica> tematicas = this.obtenerTematicas();
         Tematica res = new Tematica();
         for (Tematica miTematica : tematicas) {
             if (miTematica.getNombre().equals(elem)) {
@@ -108,5 +110,27 @@ public class Postulante extends Persona implements Serializable {
         }
         return res;
     }
+
+    public boolean contieneTematica(Tematica elem) {
+        boolean res = false;
+        HashMap<Tematica, Integer> hashMapN = this.getNivelYTemas();
+        Collection<Tematica> llaves = hashMapN.keySet();
+        for (Tematica tema : llaves) {
+            if (tema.equals(elem)) {
+                res = true;
+            }
+        }
+        return res;
+    }
+
+    public boolean contieneTieneNivel(Tematica elem, int nivel) {
+        boolean res = false;
+        HashMap<Tematica, Integer> hashMap = this.getNivelYTemas();
+        if(hashMap.get(elem) >= nivel) {
+            res = true;
+        }
+        return res;
+    }
+    
 
 }

@@ -139,6 +139,11 @@ public class MenuVentanas extends javax.swing.JFrame {
         jMenu1.add(itmRegistroPuesto);
 
         itmConsultaPuesto.setText("Consulta para puesto");
+        itmConsultaPuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmConsultaPuestoActionPerformed(evt);
+            }
+        });
         jMenu1.add(itmConsultaPuesto);
 
         menuBar.add(jMenu1);
@@ -192,6 +197,11 @@ public class MenuVentanas extends javax.swing.JFrame {
         VentanaHistoriaPostulante v = new VentanaHistoriaPostulante(this.modelo);
         v.setVisible(true);
     }//GEN-LAST:event_itmHistoriaPostulanteActionPerformed
+
+    private void itmConsultaPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmConsultaPuestoActionPerformed
+       VentanaConsultaPuestos v = new VentanaConsultaPuestos(this.modelo);
+       v.setVisible(true);
+    }//GEN-LAST:event_itmConsultaPuestoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itmAltaPostulante;

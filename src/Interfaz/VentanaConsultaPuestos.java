@@ -141,14 +141,14 @@ public class VentanaConsultaPuestos extends javax.swing.JFrame implements Proper
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         Puesto p = (Puesto) lstPuestos.getSelectedValue();
         int nivel = (int) spnNivel.getValue();
         ArrayList <Postulante> pstCumplen = this.modelo.listaPostulantesParaPuesto(p, nivel);
-        lstPostulantes.setListData(pstCumplen.toArray());
+        lstPostulantes.setListData(modelo.doyArrayListConMasDatos(pstCumplen));
         
     }//GEN-LAST:event_btnConsultarActionPerformed
 

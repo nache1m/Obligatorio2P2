@@ -175,11 +175,43 @@ public class Sistema implements Serializable {
     }
 
     public ArrayList<Postulante> listaPostulantesParaPuesto(Puesto p, int nivel) {
-       // una entrevista, forma de trabajo igual y ese o más nivel en todos los temas del puesto
-       // . Darla ordenada decrecientemente por puntaje de la última entrevista
-       //Selecciono lista de postulantes con
-       ArrayList <Postulante> misPostulantes = new ArrayList<Postulante>();
+        ArrayList<Postulante> misPostulantes = new ArrayList<Postulante>();
+        //Chequeo postulantes con almenos una entrevista y tipo de trabajo adecuado
+        for (Entrevista elem : this.listaEntrevistas) {
+            if (elem.getPostulante().getTipoTrabajo() == p.getTipo() && !misPostulantes.contains(elem.getPostulante())) {
+                misPostulantes.add(elem.getPostulante());
+            }
+        }
 
-        return misPostulantes;
+        ArrayList<Postulante> listaFinal = new ArrayList(misPostulantes);
+
+        //recorro todos las tematicas del puesto y comparo por cada postulante primero si la tienen y luego si cumplen el ingel
+        for (Tematica elem : p.getTemas()) {
+            for (Postulante postulante : misPostulantes) {
+                if (postulante != null) {
+                    if (!postulante.contieneTematica(elem)) {
+                        listaFinal.remove(postulante);
+                    } else {
+                        if (!(postulante.contieneTieneNivel(elem, nivel))) {
+                            listaFinal.remove(postulante);
+                        }
+                    }
+                }
+            }
+        }
+        return listaFinal;
+    }
+
+    public String[] doyArrayListConMasDatos(ArrayList<Postulante> lis) {
+        String[] res = new String[lis.size()];
+
+        for (int i = 0; i < lis.size(); i++) {
+            Postulante elem = lis.get(i);
+            String txt = elem.getNombre() + " / " + elem.getCedula() + " / " + elem.getEmail();
+            res[i] = txt;
+
+        }
+
+        return res;
     }
 }
