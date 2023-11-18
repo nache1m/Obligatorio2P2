@@ -81,6 +81,11 @@ public class VentanaConsultaPuestos extends javax.swing.JFrame implements Proper
         });
 
         btnExportar.setText("Exportar");
+        btnExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,10 +152,14 @@ public class VentanaConsultaPuestos extends javax.swing.JFrame implements Proper
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         Puesto p = (Puesto) lstPuestos.getSelectedValue();
         int nivel = (int) spnNivel.getValue();
-        ArrayList <Postulante> pstCumplen = this.modelo.listaPostulantesParaPuesto(p, nivel);
+        ArrayList <Postulante> pstCumplen = modelo.ordenarPostulantesPorEntrevista(this.modelo.listaPostulantesParaPuesto(p, nivel));
         lstPostulantes.setListData(modelo.doyArrayListConMasDatos(pstCumplen));
         
     }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
+      //Código botón registrar
+    }//GEN-LAST:event_btnExportarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

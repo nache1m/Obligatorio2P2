@@ -70,7 +70,7 @@ public class VentanaPersistencia extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream("salida.txt"));
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("salida"));
             Sistema sistemaLeido = (Sistema) in.readObject();
             in.close();
 

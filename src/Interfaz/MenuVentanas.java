@@ -234,7 +234,7 @@ public class MenuVentanas extends javax.swing.JFrame {
    
     //Método para persitir la ventana
     private void guardarSistemaEnArchivo() {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("salida.txt"))) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("salida"))) {
             out.writeObject(this.modelo);
             out.close();
         } catch (IOException ex) {

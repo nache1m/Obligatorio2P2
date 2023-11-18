@@ -12,7 +12,7 @@ public class Sistema implements Serializable {
     private ArrayList<Puesto> listaPuestos;
     private ArrayList<Entrevista> listaEntrevistas;
     private ArrayList<Tematica> listaTematicas;
-    private PropertyChangeSupport manejador = new PropertyChangeSupport(this);
+    private PropertyChangeSupport manejador;
 
     // Getters y Setters.
     public ArrayList<Postulante> getListaPostulantes() {
@@ -42,6 +42,7 @@ public class Sistema implements Serializable {
         listaPuestos = new ArrayList();
         listaEntrevistas = new ArrayList();
         listaTematicas = new ArrayList();
+        manejador = new PropertyChangeSupport(this);
     }
 
     // Metodos.
@@ -178,7 +179,7 @@ public class Sistema implements Serializable {
         ArrayList<Postulante> misPostulantes = new ArrayList<Postulante>();
         //Chequeo postulantes con almenos una entrevista y tipo de trabajo adecuado
         for (Entrevista elem : this.listaEntrevistas) {
-            if (elem.getPostulante().getTipoTrabajo() == p.getTipo() && !misPostulantes.contains(elem.getPostulante())) {
+            if (elem.getPostulante().getTipoTrabajo() == p.getTipo()) {
                 misPostulantes.add(elem.getPostulante());
             }
         }
@@ -213,5 +214,39 @@ public class Sistema implements Serializable {
         }
 
         return res;
+    }
+
+    public ArrayList<Postulante> ordenarPostulantesPorEntrevista(ArrayList<Postulante> ap) {
+        ArrayList<Entrevista> entrevistas = new ArrayList<Entrevista>();
+        ArrayList<Postulante> res = new ArrayList<Postulante>();
+        //Como la entrevista es la que tiene al postulante preciso sacar la última entrevista de cada postulante;
+        for (Postulante elem : ap) {
+            boolean esta = false;
+            for (int i = 0; i < this.listaEntrevistas.size() && !esta; i++) {
+                if (this.listaEntrevistas.get(i).getPostulante().equals(elem)) {
+                    if (!entrevistas.contains(this.listaEntrevistas.get(i))) {
+                        entrevistas.add(this.listaEntrevistas.get(i));
+                        esta = !esta;
+                    }
+                }
+            }
+        }
+        //Como ya tengo la última entrevista de solo mis candidatos aceptados ordeno las entrevistas
+        Collections.sort(entrevistas, new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                Entrevista e1 = (Entrevista) o1;
+                Entrevista e2 = (Entrevista) o2;
+
+                return e1.getPuntaje() - e2.getPuntaje();
+            }
+        });
+        //Saco de mi array de entrevistas de los postulantes aptos sus postulantes para devolverlo en un array de postulantes ordenados
+        for (Entrevista elem : entrevistas) {
+            res.add(elem.getPostulante());
+        }
+        
+        return res;
+
     }
 }
