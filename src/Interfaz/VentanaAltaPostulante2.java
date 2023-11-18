@@ -147,7 +147,6 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame implements Proper
         spinNivel.setValue(0);
         cbTema.setSelectedIndex(0);
         lstExperiencia.setListData(modelo.darExperiencias(this.postulante));
-        
     }//GEN-LAST:event_btnAgregar1ActionPerformed
 
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed

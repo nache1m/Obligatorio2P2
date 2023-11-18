@@ -234,7 +234,7 @@ public class VentanaAltaPostulante extends javax.swing.JFrame implements Propert
                 tipoDeTrabajo = 1;
             }
         } 
-       Postulante nuevoPostulante = new Postulante (nombre, cedula, telefono, email, LinkedIn, tipoDeTrabajo);
+       Postulante nuevoPostulante = new Postulante (nombre, cedula, telefono, LinkedIn, email, tipoDeTrabajo);
        modelo.altaPostulante(nuevoPostulante);
        VentanaAltaPostulante2 v = new VentanaAltaPostulante2(modelo, nuevoPostulante);
        v.setVisible(true);
