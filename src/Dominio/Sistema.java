@@ -2,6 +2,7 @@
 //Ezequiel Peña - 224585
 package Dominio;
 
+import Excepciones.verificoPuntajeException;
 import Excepciones.VerificoAñoException;
 import Excepciones.verificoLinkedInException;
 import Excepciones.PuestoYaExisteException;
@@ -384,7 +385,7 @@ public class Sistema implements Serializable {
 
     public boolean verificoLinkedIn(String LinkedIn) throws verificoLinkedInException {
         boolean res = false;
-        if (LinkedIn.contains("https://www.linkedin.com/in/")) {
+        if (LinkedIn.contains("https://www.linkedin.com/in/") && LinkedIn.length() > "https://www.linkedin.com/in/".length()) {
             res = true;
         } else {
             throw new verificoLinkedInException("Su LinkedIn debe estar en formato https://www.linkedin.com/in/minickname");
@@ -422,4 +423,14 @@ public class Sistema implements Serializable {
         }
         return res;
 }
+
+    public boolean verificoPuntaje(int puntaje) throws verificoPuntajeException {
+        boolean res = false;
+        if (puntaje >= 0 && puntaje <=100) {
+            res = true;
+        } else {
+        throw new verificoPuntajeException("El puntaje debe estar comprendido entre 0 y 100.");
+        }
+        return res;
+    }
     }
