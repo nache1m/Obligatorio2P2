@@ -272,6 +272,7 @@ public class VentanaAltaPostulante extends javax.swing.JFrame implements Propert
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Hay uno o más campos con el formato inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
         }
+        this.dispose();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed

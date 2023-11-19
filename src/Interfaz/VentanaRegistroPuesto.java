@@ -6,7 +6,7 @@ import Dominio.Puesto;
 import Dominio.Sistema;
 import Dominio.Tematica;
 import Excepciones.CampoVacioException;
-import Excepciones.PuestoYaExiste;
+import Excepciones.PuestoYaExisteException;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -198,7 +198,7 @@ public class VentanaRegistroPuesto extends javax.swing.JFrame {
             }
         } catch (CampoVacioException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
-        } catch (PuestoYaExiste ex) {
+        } catch (PuestoYaExisteException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
         }
     

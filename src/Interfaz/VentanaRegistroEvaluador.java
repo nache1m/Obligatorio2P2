@@ -4,14 +4,22 @@ package Interfaz;
 
 import Dominio.Evaluador;
 import Dominio.Sistema;
+import Excepciones.CampoVacioException;
+import Excepciones.CedulaFormatoException;
+import Excepciones.CedulaRepetidaException;
+import Excepciones.VerificoAñoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author elnac
  */
 public class VentanaRegistroEvaluador extends javax.swing.JFrame {
+
     private Sistema modelo;
-    
+
     public VentanaRegistroEvaluador(Sistema sistema) {
         this.modelo = sistema;
         initComponents();
@@ -104,9 +112,28 @@ public class VentanaRegistroEvaluador extends javax.swing.JFrame {
         String cedula = txtCedula.getText();
         String direccion = txtDireccion.getText();
         String año = txtAño.getText();
-        Evaluador ev = new Evaluador (nombre,cedula,direccion,año);
-        modelo.agregarEvaluador(ev);
-        this.dispose();
+        try {
+            if (this.modelo.campoNoEstaVacio(nombre, "Nombre")
+                    && this.modelo.campoNoEstaVacio(cedula, "Cedula")
+                    && this.modelo.verificoCedula(cedula)
+                    && this.modelo.campoNoEstaVacio(direccion, "Dirección")
+                    && this.modelo.campoNoEstaVacio(año, "Año")
+                    && this.modelo.verificoAño(año) 
+                    ) {
+                Evaluador ev = new Evaluador(nombre, cedula, direccion, año);
+                modelo.agregarEvaluador(ev);
+                this.dispose();
+                JOptionPane.showMessageDialog(null, "El evaluador fue agregado con éxito", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (CampoVacioException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+        } catch (CedulaRepetidaException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+        } catch (CedulaFormatoException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+        } catch (VerificoAñoException e) {
+           JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
 

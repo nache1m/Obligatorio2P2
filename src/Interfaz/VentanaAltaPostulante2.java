@@ -149,11 +149,15 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame implements Proper
     private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
 
         int nivel1 = Integer.parseInt(String.valueOf(spinNivel.getValue()));
+        if (nivel1 <= 10 && nivel1 >= 0) {
         Tematica tema = (Tematica) cbTema.getSelectedItem();
         this.postulante.agregarTema(tema, nivel1);
         spinNivel.setValue(0);
         cbTema.setSelectedIndex(0);
         lstExperiencia.setListData(modelo.darExperiencias(this.postulante));
+        } else {
+            JOptionPane.showMessageDialog(null, "El nivel seleccionado tiene que estár comprendido entre 0 y 10.", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnAgregar1ActionPerformed
 

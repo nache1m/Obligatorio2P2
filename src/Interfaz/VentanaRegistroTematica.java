@@ -113,6 +113,8 @@ public class VentanaRegistroTematica extends javax.swing.JFrame {
         } catch (CampoVacioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
         }
+        this.dispose();
+        JOptionPane.showMessageDialog(null, "La temática fue creada con éxito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 ;
     
     }//GEN-LAST:event_btnRegistrarActionPerformed

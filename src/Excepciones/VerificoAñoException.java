@@ -8,7 +8,10 @@ package Excepciones;
  *
  * @author 59891
  */
-public class PuestoYaExiste extends Exception {
+public class VerificoAñoException extends Exception {
+
+    public VerificoAñoException(String el_año_debe_estar_comprendido_entre_1900_) {
+        super(el_año_debe_estar_comprendido_entre_1900_);
+    }
     
-public PuestoYaExiste (String PuestoYaExiste ) {super(PuestoYaExiste);}
 }

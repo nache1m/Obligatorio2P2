@@ -2,8 +2,9 @@
 //Ezequiel Peña - 224585
 package Dominio;
 
+import Excepciones.VerificoAñoException;
 import Excepciones.verificoLinkedInException;
-import Excepciones.PuestoYaExiste;
+import Excepciones.PuestoYaExisteException;
 import Excepciones.verificarMailException;
 import Excepciones.VerificarTelefonoException;
 import Excepciones.CedulaFormatoException;
@@ -303,25 +304,25 @@ public class Sistema implements Serializable {
 
         try {
             int ci = Integer.parseInt(cedula);
+        } catch (Exception e) {
+            throw new CedulaFormatoException("La cédula debe escribirse sin puntos ni guiones y largo 8");
         }
-        
-        catch (Exception e) {
-         throw new CedulaFormatoException("La cédula debe escribirse sin puntos ni guiones y largo 8");
-        }
-        
-        if(cedula.length() != 8) {
+
+        if (cedula.length() != 8) {
             res = false;
             throw new CedulaFormatoException("La cédula debe escribirse sin puntos ni guiones y largo 8");
         }
         for (Postulante elem : this.getListaPostulantes()) {
             if (elem.getCedula().equals(cedula)) {
-               res = false;
-               throw new CedulaRepetidaException("La cédula ingresaga ya existe. Por favor verifique");
+                res = false;
+                throw new CedulaRepetidaException("La cédula ingresaga ya existe. Por favor verifique");
             }
         }
 
         return res;
-    };
+    }
+
+    ;
 
    public int cantidadPostulantesNivelMayorA5(Tematica t) {
         int cant = 0;
@@ -329,34 +330,34 @@ public class Sistema implements Serializable {
             HashMap<Tematica, Integer> hashMap = p.getNivelYTemas();
             Collection<Tematica> llaves = hashMap.keySet();
             for (Tematica llave : llaves) {
-                if (llave.equals(t) && (hashMap.get(llave) > 5)){
+                if (llave.equals(t) && (hashMap.get(llave) > 5)) {
                     cant++;
                 }
             }
         }
         return cant;
     }
-    
-    public int cantidadPuestosRequierenConocimiento(Tematica t){
+
+    public int cantidadPuestosRequierenConocimiento(Tematica t) {
         int cant = 0;
-        for (Puesto p : this.listaPuestos){
-            ArrayList <Tematica> temas = p.getTemas();
-            for (Tematica tema : temas){
-                if (tema.equals(t)){
+        for (Puesto p : this.listaPuestos) {
+            ArrayList<Tematica> temas = p.getTemas();
+            for (Tematica tema : temas) {
+                if (tema.equals(t)) {
                     cant++;
                 }
             }
         }
         return cant;
     }
-    
+
     public PropertyChangeSupport getManejador() {
         return this.manejador;
     }
 
     public boolean verificoTelefono(String telefono) throws VerificarTelefonoException {
         boolean res = false;
-        
+
         try {
             int tel = Integer.parseInt(telefono);
             if (telefono.length() >= 8 && telefono.length() <= 9) {
@@ -368,32 +369,30 @@ public class Sistema implements Serializable {
             JOptionPane.showMessageDialog(null, "El télefono debe estar en formato número y tener 8 u 9 carácteres", "Alerta", JOptionPane.WARNING_MESSAGE);
         }
         return res;
-            
-            
-            
+
     }
 
     public boolean verificoMail(String email) throws verificarMailException {
         boolean res = false;
-       if(email.contains("@gmail.com") || email.contains("@hotmail.com")|| email.contains("@yahoo.com")) {
-           res = true;
-       } else {
-           throw new verificarMailException("El email debe ser @gmail.com, @hotmail.com o @hotmail.com");
-       }
+        if (email.contains("@gmail.com") || email.contains("@hotmail.com") || email.contains("@yahoo.com")) {
+            res = true;
+        } else {
+            throw new verificarMailException("El email debe ser @gmail.com, @hotmail.com o @hotmail.com");
+        }
         return res;
     }
 
     public boolean verificoLinkedIn(String LinkedIn) throws verificoLinkedInException {
-       boolean res = false;
-       if(LinkedIn.contains("https://www.linkedin.com/in/")) {
-           res = true;
-       } else {
-           throw new verificoLinkedInException("Su LinkedIn debe estar en formato https://www.linkedin.com/in/minickname");
-       }
+        boolean res = false;
+        if (LinkedIn.contains("https://www.linkedin.com/in/")) {
+            res = true;
+        } else {
+            throw new verificoLinkedInException("Su LinkedIn debe estar en formato https://www.linkedin.com/in/minickname");
+        }
         return res;
     }
-    
-    public boolean puestoRepetido(String nombre) throws PuestoYaExiste {
+
+    public boolean puestoRepetido(String nombre) throws PuestoYaExisteException {
         ArrayList<Puesto> lista = this.listaPuestos;
         boolean encontre = false;
         for (int i = 0; i < lista.size(); i++) {
@@ -402,8 +401,25 @@ public class Sistema implements Serializable {
             }
         }
         if (encontre) {
-            throw new PuestoYaExiste("El puesto ya existe.");
+            throw new PuestoYaExisteException("El puesto ya existe.");
         }
         return encontre;
     }
+
+    public boolean verificoAño (String año)  throws VerificoAñoException {
+        boolean res = false;
+        try {
+             int n = Integer.parseInt(año);
+             if (n >= 1900 && n <= 2023) {
+                 res = true;
+             } else {
+             throw new VerificoAñoException("El año debe estar comprendido entre 1900 y el año actual");
+             }
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un año en integer XXXX", "Alerta", JOptionPane.WARNING_MESSAGE);
+            
+        }
+        return res;
 }
+    }
