@@ -22,13 +22,14 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame implements Proper
 
     private Sistema modelo;
     private Postulante postulante;
+
     public VentanaAltaPostulante2(Sistema miSistema, Postulante miPostulante, VentanaAltaPostulante miVentanaAltaPostualnte) {
         initComponents();
         this.modelo = miSistema;
         modelo.agregarEscuchas(this);
         this.postulante = miPostulante;
         agregarTemasAlCombo(cbTema, modelo.getListaTematicas());
-        
+
     }
 
     /**
@@ -141,27 +142,27 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame implements Proper
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         this.modelo.altaPostulante(this.postulante);
+        this.dispose();
         JOptionPane.showMessageDialog(null, "El postulante fue creado con éxito", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
 
-        int nivel1 =  Integer.parseInt(String.valueOf(spinNivel.getValue()));
-        Tematica tema = (Tematica)cbTema.getSelectedItem();
+        int nivel1 = Integer.parseInt(String.valueOf(spinNivel.getValue()));
+        Tematica tema = (Tematica) cbTema.getSelectedItem();
         this.postulante.agregarTema(tema, nivel1);
         spinNivel.setValue(0);
         cbTema.setSelectedIndex(0);
         lstExperiencia.setListData(modelo.darExperiencias(this.postulante));
-        
+
     }//GEN-LAST:event_btnAgregar1ActionPerformed
 
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
 
-       String [] experiencia = lstExperiencia.getSelectedValue().split("\\(");
-       String nombreTematica = experiencia[0];
-       modelo.borrarExperiencia(nombreTematica, this.postulante);
-       lstExperiencia.setListData(modelo.darExperiencias(this.postulante));
+        String[] experiencia = lstExperiencia.getSelectedValue().split("\\(");
+        String nombreTematica = experiencia[0];
+        modelo.borrarExperiencia(nombreTematica, this.postulante);
+        lstExperiencia.setListData(modelo.darExperiencias(this.postulante));
     }//GEN-LAST:event_btnEliminar1ActionPerformed
 
     private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
@@ -192,10 +193,9 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame implements Proper
     private javax.swing.JSpinner spinNivel;
     // End of variables declaration//GEN-END:variables
 
-    
     private void agregarTemasAlCombo(JComboBox<Tematica> cbTema, ArrayList<Tematica> listaTematicas) {
         cbTema.removeAllItems();
-        for(Tematica elem: modelo.getListaTematicas()) {
+        for (Tematica elem : modelo.getListaTematicas()) {
             cbTema.addItem(elem);
         }
     }
@@ -205,8 +205,8 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame implements Proper
         lstExperiencia.setListData(modelo.darExperiencias(this.postulante));
         agregarTemasAlCombo(cbTema, modelo.getListaTematicas());
     }
-    
- public void borrarTemas(List<String> experienciasABorrar, Postulante p) {
+
+    public void borrarTemas(List<String> experienciasABorrar, Postulante p) {
         for (String elem : experienciasABorrar) {
             String elemento = elem.split("\\(")[0];
             Tematica tema = p.obtenerTematicaPorNombre(elemento);
