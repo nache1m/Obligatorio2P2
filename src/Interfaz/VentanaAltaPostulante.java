@@ -5,8 +5,13 @@ import Dominio.Sistema;
 import Excepciones.CampoVacioException;
 import Excepciones.CedulaFormatoException;
 import Excepciones.CedulaRepetidaException;
+import Excepciones.VerificarTelefonoException;
+import Excepciones.verificarMailException;
+import Excepciones.verificoLinkedInException;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -219,8 +224,9 @@ public class VentanaAltaPostulante extends javax.swing.JFrame implements Propert
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
 
-         String nombre = txtNombre1.getText();
+        String nombre = txtNombre1.getText();
         String cedula = txtCedula.getText();
+        String direccion = txtDireccion.getText();
         String telefono = txtTelefono.getText();
         String email = txtMail.getText();
         String LinkedIn = txtLinkedin.getText();
@@ -240,25 +246,32 @@ public class VentanaAltaPostulante extends javax.swing.JFrame implements Propert
 
         try {
             if (this.modelo.campoNoEstaVacio(nombre, "Nombre") && this.modelo.campoNoEstaVacio(cedula, "Cedula") && this.modelo.verificoCedula(cedula)
-                    && this.modelo.campoNoEstaVacio(telefono, "Telefono") && this.modelo.campoNoEstaVacio(email, "Email") && this.modelo.campoNoEstaVacio(LinkedIn, "LinkedIn")) {
+                    && this.modelo.campoNoEstaVacio(direccion, "Dirección") && this.modelo.campoNoEstaVacio(telefono, "Telefono")
+                    && this.modelo.verificoTelefono(telefono)
+                    && this.modelo.campoNoEstaVacio(email, "Email")
+                    && this.modelo.verificoMail(email)
+                    && this.modelo.campoNoEstaVacio(LinkedIn, "LinkedIn")
+                    && this.modelo.verificoLinkedIn(LinkedIn)) {
+
                 Postulante nuevoPostulante = new Postulante(nombre, cedula, telefono, LinkedIn, email, tipoDeTrabajo);
-                modelo.altaPostulante(nuevoPostulante);
-                VentanaAltaPostulante2 v = new VentanaAltaPostulante2(modelo, nuevoPostulante);
+                VentanaAltaPostulante2 v = new VentanaAltaPostulante2(modelo, nuevoPostulante, this);
                 v.setVisible(true);
             }
         } catch (CampoVacioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
-        }
-        catch (CedulaRepetidaException e) {
+        } catch (CedulaRepetidaException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+        } catch (CedulaFormatoException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+        } catch (VerificarTelefonoException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+        } catch (verificarMailException e) {
+             JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+        } catch (verificoLinkedInException e) {
+             JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Hay uno o más campos con el formato inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
         }
-        
-        catch (CedulaFormatoException e) {
-        
-        JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);}
-        
-        catch (Exception e) {
-         JOptionPane.showMessageDialog(null, "Hay uno o más campos con el formato inválido", "Alerta", JOptionPane.WARNING_MESSAGE);}
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed

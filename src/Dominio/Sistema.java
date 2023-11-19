@@ -2,6 +2,10 @@
 //Ezequiel Peña - 224585
 package Dominio;
 
+import Excepciones.verificoLinkedInException;
+import Excepciones.PuestoYaExiste;
+import Excepciones.verificarMailException;
+import Excepciones.VerificarTelefonoException;
 import Excepciones.CedulaFormatoException;
 import Excepciones.CampoVacioException;
 import Excepciones.CedulaRepetidaException;
@@ -10,6 +14,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 public class Sistema implements Serializable {
 
@@ -347,5 +352,58 @@ public class Sistema implements Serializable {
     
     public PropertyChangeSupport getManejador() {
         return this.manejador;
+    }
+
+    public boolean verificoTelefono(String telefono) throws VerificarTelefonoException {
+        boolean res = false;
+        
+        try {
+            int tel = Integer.parseInt(telefono);
+            if (telefono.length() >= 8 && telefono.length() <= 9) {
+                res = true;
+            } else {
+                throw new VerificarTelefonoException("El télefono debe estar en formato número y tener 8 u 9 carácteres");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "El télefono debe estar en formato número y tener 8 u 9 carácteres", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
+        return res;
+            
+            
+            
+    }
+
+    public boolean verificoMail(String email) throws verificarMailException {
+        boolean res = false;
+       if(email.contains("@gmail.com") || email.contains("@hotmail.com")|| email.contains("@yahoo.com")) {
+           res = true;
+       } else {
+           throw new verificarMailException("El email debe ser @gmail.com, @hotmail.com o @hotmail.com");
+       }
+        return res;
+    }
+
+    public boolean verificoLinkedIn(String LinkedIn) throws verificoLinkedInException {
+       boolean res = false;
+       if(LinkedIn.contains("https://www.linkedin.com/in/")) {
+           res = true;
+       } else {
+           throw new verificoLinkedInException("Su LinkedIn debe estar en formato https://www.linkedin.com/in/minickname");
+       }
+        return res;
+    }
+    
+    public boolean puestoRepetido(String nombre) throws PuestoYaExiste {
+        ArrayList<Puesto> lista = this.listaPuestos;
+        boolean encontre = false;
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getNombre().equalsIgnoreCase(nombre)) {
+                encontre = true;
+            }
+        }
+        if (encontre) {
+            throw new PuestoYaExiste("El puesto ya existe.");
+        }
+        return encontre;
     }
 }

@@ -9,6 +9,8 @@ import Dominio.Sistema;
 import java.awt.Desktop;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -16,13 +18,14 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class VentanaHistoriaPostulante extends javax.swing.JFrame {
+public class VentanaHistoriaPostulante extends javax.swing.JFrame implements PropertyChangeListener {
 
     private Sistema modelo;
 
     public VentanaHistoriaPostulante(Sistema miModelo) {
         initComponents();
         this.modelo = miModelo;
+        modelo.agregarEscuchas(this);
         modelo.ordenarPostulantesPorCedula();
         lstPostulantes.setListData(modelo.getListaPostulantes().toArray());
         lstPostulantes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -277,13 +280,13 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame {
 
     private void lblLinkedinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLinkedinMouseClicked
         try {
-            if (Desktop.isDesktopSupported()){
+            if (Desktop.isDesktopSupported()) {
                 Desktop desktop = Desktop.getDesktop();
-                if (desktop.isSupported(Desktop.Action.BROWSE)){
-                    desktop.browse(new URI (lblLinkedin.getText()));
+                if (desktop.isSupported(Desktop.Action.BROWSE)) {
+                    desktop.browse(new URI(lblLinkedin.getText()));
                 }
-            } 
-        } catch (Exception e){
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_lblLinkedinMouseClicked
@@ -318,4 +321,9 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame {
     private javax.swing.JTable tblEntrevistas;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        lstPostulantes.setListData(modelo.getListaPostulantes().toArray());
+    }
 }

@@ -6,18 +6,21 @@ package Interfaz;
 
 import Dominio.Sistema;
 import Dominio.Tematica;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 /**
  *
  * @author elnac
  */
-public class VentanaConsultaTematica extends javax.swing.JFrame {
+public class VentanaConsultaTematica extends javax.swing.JFrame implements PropertyChangeListener {
 
     private Sistema modelo;
 
     public VentanaConsultaTematica(Sistema modelo) {
         initComponents();
         this.modelo = modelo;
+         modelo.agregarEscuchas(this);
         lstTematicas.setListData(modelo.getListaTematicas().toArray());
         lstTematicas.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -97,4 +100,8 @@ public class VentanaConsultaTematica extends javax.swing.JFrame {
     private javax.swing.JLabel txtCantidadPostulantes;
     private javax.swing.JLabel txtCantidadPuestos;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+ lstTematicas.setListData(modelo.getListaTematicas().toArray());    }
 }
