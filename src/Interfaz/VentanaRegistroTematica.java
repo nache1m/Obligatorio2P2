@@ -1,12 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+//Ignacio Parrado - 303400
+//Ezequiel Peña - 224585
 package Interfaz;
 
 import Dominio.Sistema;
 import Dominio.Tematica;
+import Excepciones.CampoVacioException;
+import Excepciones.TematicaYaExisteException;
 import Interfaz.MenuVentanas;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -95,12 +98,23 @@ public class VentanaRegistroTematica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        
+        try {   
         String nombre = txtNombre.getText();
         String descripcion = txtDesc.getText();
         Tematica nuevaTematica = new Tematica (nombre, descripcion);
+        if (this.modelo.campoNoEstaVacio(nombre, "Nombre")&& this.modelo.campoNoEstaVacio(descripcion, "Descripción"));
         modelo.agregarTematica(nuevaTematica);
         txtNombre.setText("");
         txtDesc.setText("");
+        }
+        catch (TematicaYaExisteException e) {
+             JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+        } catch (CampoVacioException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
+;
+    
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

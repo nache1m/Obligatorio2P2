@@ -2,8 +2,12 @@ package Interfaz;
 
 import Dominio.Postulante;
 import Dominio.Sistema;
+import Excepciones.CampoVacioException;
+import Excepciones.CedulaFormatoException;
+import Excepciones.CedulaRepetidaException;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -215,7 +219,7 @@ public class VentanaAltaPostulante extends javax.swing.JFrame implements Propert
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
 
-        String nombre = txtNombre1.getText();
+         String nombre = txtNombre1.getText();
         String cedula = txtCedula.getText();
         String telefono = txtTelefono.getText();
         String email = txtMail.getText();
@@ -233,10 +237,28 @@ public class VentanaAltaPostulante extends javax.swing.JFrame implements Propert
                 tipoDeTrabajo = 1;
             }
         }
-        Postulante nuevoPostulante = new Postulante(nombre, cedula, telefono, LinkedIn, email, tipoDeTrabajo);
-        modelo.altaPostulante(nuevoPostulante);
-        VentanaAltaPostulante2 v = new VentanaAltaPostulante2(modelo, nuevoPostulante);
-        v.setVisible(true);
+
+        try {
+            if (this.modelo.campoNoEstaVacio(nombre, "Nombre") && this.modelo.campoNoEstaVacio(cedula, "Cedula") && this.modelo.verificoCedula(cedula)
+                    && this.modelo.campoNoEstaVacio(telefono, "Telefono") && this.modelo.campoNoEstaVacio(email, "Email") && this.modelo.campoNoEstaVacio(LinkedIn, "LinkedIn")) {
+                Postulante nuevoPostulante = new Postulante(nombre, cedula, telefono, LinkedIn, email, tipoDeTrabajo);
+                modelo.altaPostulante(nuevoPostulante);
+                VentanaAltaPostulante2 v = new VentanaAltaPostulante2(modelo, nuevoPostulante);
+                v.setVisible(true);
+            }
+        } catch (CampoVacioException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
+        catch (CedulaRepetidaException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        catch (CedulaFormatoException e) {
+        
+        JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);}
+        
+        catch (Exception e) {
+         JOptionPane.showMessageDialog(null, "Hay uno o más campos con el formato inválido", "Alerta", JOptionPane.WARNING_MESSAGE);}
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed

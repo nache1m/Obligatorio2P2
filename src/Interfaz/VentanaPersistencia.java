@@ -1,3 +1,6 @@
+//Ignacio Parrado - 303400
+//Ezequiel Peña - 224585
+
 package Interfaz;
 
 import Dominio.Entrevista;
@@ -6,6 +9,7 @@ import Dominio.Postulante;
 import Dominio.Respaldo;
 import Dominio.Sistema;
 import Dominio.Tematica;
+import Excepciones.TematicaYaExisteException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -66,7 +70,11 @@ public class VentanaPersistencia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.crearModeloDesdeCero();
+        try {
+            this.crearModeloDesdeCero();
+        } catch (TematicaYaExisteException ex) {
+            Logger.getLogger(VentanaPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -82,22 +90,34 @@ public class VentanaPersistencia extends javax.swing.JFrame {
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "No existe archivo para persistir", "Error", JOptionPane.WARNING_MESSAGE);
             JOptionPane.showMessageDialog(null, "Se creará un nuevo sistema", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            this.crearModeloDesdeCero();
+            try {
+                this.crearModeloDesdeCero();
+            } catch (TematicaYaExisteException ex) {
+                Logger.getLogger(VentanaPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "A ocurrido algo inesperado. No se pudo persistir el archivo", "Error", JOptionPane.ERROR_MESSAGE);
             JOptionPane.showMessageDialog(null, "Se creará un nuevo sistema", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            this.crearModeloDesdeCero();
+            try {
+                this.crearModeloDesdeCero();
+            } catch (TematicaYaExisteException ex) {
+                Logger.getLogger(VentanaPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "A ocurrido algo inesperado. No se pudo persistir el archivo", "Error", JOptionPane.ERROR_MESSAGE);
             JOptionPane.showMessageDialog(null, "Se creará un nuevo sistema", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            this.crearModeloDesdeCero();
+            try {
+                this.crearModeloDesdeCero();
+            } catch (TematicaYaExisteException ex1) {
+                Logger.getLogger(VentanaPersistencia.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void crearModeloDesdeCero() {
+    public void crearModeloDesdeCero() throws TematicaYaExisteException {
         Sistema modelo = new Sistema();
 
         MenuVentanas menu = new MenuVentanas(modelo);

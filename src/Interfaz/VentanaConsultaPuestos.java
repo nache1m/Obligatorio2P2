@@ -4,7 +4,7 @@
  */
 package Interfaz;
 
-import Dominio.ArchivosLectura.ArchivoGrabacion;
+import Dominio.Utilidades.ArchivoGrabacion;
 import Dominio.Postulante;
 import Dominio.Puesto;
 import Dominio.Sistema;

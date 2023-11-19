@@ -1,4 +1,4 @@
-package Dominio.ArchivosLectura;
+package Dominio.Utilidades;
 
 
 import java.io.*;

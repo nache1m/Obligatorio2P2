@@ -1,4 +1,5 @@
-
+//Ignacio Parrado - 303400
+//Ezequiel Peña - 224585
 package Dominio;
 
 import java.io.Serializable;

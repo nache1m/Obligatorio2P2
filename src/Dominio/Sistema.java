@@ -1,5 +1,11 @@
+//Ignacio Parrado - 303400
+//Ezequiel Peña - 224585
 package Dominio;
 
+import Excepciones.CedulaFormatoException;
+import Excepciones.CampoVacioException;
+import Excepciones.CedulaRepetidaException;
+import Excepciones.TematicaYaExisteException;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
@@ -56,13 +62,17 @@ public class Sistema implements Serializable {
     }
 
     // Metodos.
-    public boolean tematicaRepetida(String nombre) {
+    public boolean tematicaRepetida(String nombre) throws TematicaYaExisteException {
         ArrayList<Tematica> lista = this.listaTematicas;
         boolean encontre = false;
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).getNombre().equalsIgnoreCase(nombre)) {
                 encontre = true;
             }
+        }
+
+        if (encontre) {
+            throw new TematicaYaExisteException("La tématica ya existe");
         }
         return encontre;
     }
@@ -80,9 +90,12 @@ public class Sistema implements Serializable {
         manejador.firePropertyChange("listaEntrevistas", lista, listaEntrevistas);
     }
 
-    public void agregarTematica(Tematica tema) {
+    public void agregarTematica(Tematica tema) throws TematicaYaExisteException {
         ArrayList<Tematica> listaTemaVieja = new ArrayList<>(listaTematicas);
-        this.listaTematicas.add(tema);
+        if (!tematicaRepetida(tema.getNombre())) {
+            this.listaTematicas.add(tema);
+        }
+
         manejador.firePropertyChange("listaTematicas", listaTemaVieja, listaTematicas);
     }
 
@@ -271,7 +284,41 @@ public class Sistema implements Serializable {
 
     }
 
-    public int cantidadPostulantesNivelMayorA5(Tematica t) {
+    public boolean campoNoEstaVacio(String campo, String nombre) throws CampoVacioException {
+        boolean res = true;
+        if (campo.equals("")) {
+            res = false;
+            throw new CampoVacioException("El campo " + nombre + " está vacío y es obligatorio.");
+        }
+        return res;
+    }
+
+    public boolean verificoCedula(String cedula) throws CedulaRepetidaException, CedulaFormatoException {
+        boolean res = true;
+
+        try {
+            int ci = Integer.parseInt(cedula);
+        }
+        
+        catch (Exception e) {
+         throw new CedulaFormatoException("La cédula debe escribirse sin puntos ni guiones y largo 8");
+        }
+        
+        if(cedula.length() != 8) {
+            res = false;
+            throw new CedulaFormatoException("La cédula debe escribirse sin puntos ni guiones y largo 8");
+        }
+        for (Postulante elem : this.getListaPostulantes()) {
+            if (elem.getCedula().equals(cedula)) {
+               res = false;
+               throw new CedulaRepetidaException("La cédula ingresaga ya existe. Por favor verifique");
+            }
+        }
+
+        return res;
+    };
+
+   public int cantidadPostulantesNivelMayorA5(Tematica t) {
         int cant = 0;
         for (Postulante p : this.listaPostulantes) {
             HashMap<Tematica, Integer> hashMap = p.getNivelYTemas();
@@ -297,7 +344,7 @@ public class Sistema implements Serializable {
         }
         return cant;
     }
-
+    
     public PropertyChangeSupport getManejador() {
         return this.manejador;
     }

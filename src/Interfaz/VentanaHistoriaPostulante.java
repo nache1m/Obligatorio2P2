@@ -1,6 +1,8 @@
+//Ignacio Parrado - 303400
+//Ezequiel Peña - 224585
 package Interfaz;
 
-import Dominio.ArchivosLectura.ResaltadorColores;
+import Dominio.Utilidades.ResaltadorColores;
 import Dominio.Entrevista;
 import Dominio.Postulante;
 import Dominio.Sistema;
