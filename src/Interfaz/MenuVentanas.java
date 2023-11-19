@@ -9,19 +9,20 @@ import Dominio.Sistema;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author elnac
  */
 public class MenuVentanas extends javax.swing.JFrame {
-    
+
     private Sistema modelo;
-    
+
     public MenuVentanas(Sistema miSistema) {
         initComponents();
         this.modelo = miSistema;
-        
+
     }
 
     /**
@@ -161,24 +162,36 @@ public class MenuVentanas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itmRegistroTematicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmRegistroTematicaActionPerformed
-            VentanaRegistroTematica v = new VentanaRegistroTematica(modelo);
-            v.setVisible(true);
-            // Metodo para registrar.
+        VentanaRegistroTematica v = new VentanaRegistroTematica(modelo);
+        v.setVisible(true);
+        // Metodo para registrar.
     }//GEN-LAST:event_itmRegistroTematicaActionPerformed
 
     private void itmAltaPostulanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAltaPostulanteActionPerformed
-        VentanaAltaPostulante v = new VentanaAltaPostulante(modelo);
-        v.setVisible(true);
+        if (this.modelo.getListaTematicas().size() >= 1) {
+            VentanaAltaPostulante v = new VentanaAltaPostulante(modelo);
+            v.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Para crear un postulante necesita antes crear una temática.", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_itmAltaPostulanteActionPerformed
 
     private void itmRegistroEntrevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmRegistroEntrevistaActionPerformed
-        VentanaEntrevistas v = new VentanaEntrevistas(modelo);
-        v.setVisible(true);
+        if (this.modelo.getListaPostulantes().size() >= 1 && this.modelo.getListaPostulantes().size() >= 1) {
+            VentanaEntrevistas v = new VentanaEntrevistas(modelo);
+            v.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Para crear una entrevista necesita antes tener un postulante y un evaluador.", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_itmRegistroEntrevistaActionPerformed
 
     private void itmBajaPostulanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmBajaPostulanteActionPerformed
-        VentanaBajaPostulante v = new VentanaBajaPostulante(this.modelo);
-        v.setVisible(true);
+        if (this.modelo.getListaPostulantes().size() >= 1) {
+            VentanaBajaPostulante v = new VentanaBajaPostulante(this.modelo);
+            v.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Para dar de baja un postulante necesita antes tener un postulante.", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_itmBajaPostulanteActionPerformed
 
     private void itmRegistroEvaluadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmRegistroEvaluadorActionPerformed
@@ -195,23 +208,36 @@ public class MenuVentanas extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void itmRegistroPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmRegistroPuestoActionPerformed
-        VentanaRegistroPuesto v = new VentanaRegistroPuesto (this.modelo);
+        VentanaRegistroPuesto v = new VentanaRegistroPuesto(this.modelo);
         v.setVisible(true);
     }//GEN-LAST:event_itmRegistroPuestoActionPerformed
 
     private void itmHistoriaPostulanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmHistoriaPostulanteActionPerformed
-        VentanaHistoriaPostulante v = new VentanaHistoriaPostulante(this.modelo);
-        v.setVisible(true);
+        if (this.modelo.getListaPostulantes().size() >= 1) {
+            VentanaHistoriaPostulante v = new VentanaHistoriaPostulante(this.modelo);
+            v.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Para ver la historia de un postulante necesita antes tener un postulante.", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
+
     }//GEN-LAST:event_itmHistoriaPostulanteActionPerformed
 
     private void itmConsultaPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmConsultaPuestoActionPerformed
-       VentanaConsultaPuestos v = new VentanaConsultaPuestos(this.modelo);
-       v.setVisible(true);
+        if (this.modelo.getListaPuestos().size() >= 1) {
+            VentanaConsultaPuestos v = new VentanaConsultaPuestos(this.modelo);
+            v.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Para hacer consulta por puestos necesita antes un puesto.", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_itmConsultaPuestoActionPerformed
 
     private void itmConsultaTematicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmConsultaTematicaActionPerformed
-        VentanaConsultaTematica v = new VentanaConsultaTematica(this.modelo);
-        v.setVisible(true);
+        if (this.modelo.getListaTematicas().size() >= 1) {
+            VentanaConsultaTematica v = new VentanaConsultaTematica(this.modelo);
+            v.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Para hacer consultas por temática necesita antes una temática.", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_itmConsultaTematicaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -232,11 +258,9 @@ public class MenuVentanas extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 
-
-   
     //Método para persitir la ventana
     private void guardarSistemaEnArchivo() {
-        
+
         Respaldo miRespaldo = new Respaldo(this.modelo);
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("salida"))) {
             out.writeObject(miRespaldo);

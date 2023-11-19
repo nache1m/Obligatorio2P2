@@ -142,7 +142,7 @@ public class VentanaAltaPostulante2 extends javax.swing.JFrame implements Proper
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         this.modelo.altaPostulante(this.postulante);
         JOptionPane.showMessageDialog(null, "El postulante fue creado con éxito", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-        this.dispose();
+        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed

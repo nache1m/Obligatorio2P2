@@ -125,26 +125,7 @@ public class VentanaPersistencia extends javax.swing.JFrame {
         menu.setVisible(true);
 
         this.setVisible(false);
-        Tematica Java = new Tematica ("Java", "Útil para backend");
-        Tematica React = new Tematica ("React", "Útil para FrontEnd");
-        Tematica HTML = new Tematica ("HTML", "No es un lenguaje de programación");
-        Postulante Nacho = new Postulante("Nacho", "2.222.222-7", "099123456", "nacheim@gmail.com", "https://www.linkedin.comm/in/nacheim", 2);
-        Postulante Eze = new Postulante("Eze", "5.064.910-7 ", "091219658", "ezequielpepedemonte@gmail.com", "https://www.linkedin.comm/in/ezepepedemonte", 1); 
-        Evaluador e1 = new Evaluador("Alejandro", "9.999.999-9", "Gaboto 1461", "1997");
-        Evaluador e2 = new Evaluador("Seba", "7.799.799-2", "Gaboto 2010", "2010");
-        Entrevista entre1 = new Entrevista(e1, Eze, 10, "Sirve para backend");
-        Entrevista entre2 = new Entrevista(e2, Nacho, 10, "Sirve para frontend");
-        Entrevista entre3 = new Entrevista(e2, Eze, 8, "Sirve para support");
-        modelo.agregarTematica(HTML);
-        modelo.agregarTematica(Java);
-        modelo.agregarTematica(React);
-        modelo.altaPostulante(Eze);
-        modelo.altaPostulante(Nacho);
-        modelo.agregarEvaluador(e1);
-        modelo.agregarEvaluador(e2);
-        modelo.agregarEntrevista(entre1);
-        modelo.agregarEntrevista(entre2);
-        modelo.agregarEntrevista(entre3);
+       
     }
 
 
