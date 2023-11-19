@@ -22,6 +22,6 @@ public class Evaluador extends Persona implements Serializable{
     
     // Metodos.
     public String toString() {
-        return super.getNombre() + "("+super.getCedula()+")";
+        return super.getNombre() + " ("+super.getCedula()+")";
     }
 }

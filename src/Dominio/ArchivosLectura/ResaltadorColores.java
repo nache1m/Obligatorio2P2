@@ -12,6 +12,9 @@ public class ResaltadorColores extends DefaultTableCellRenderer {
     public void setPalabraBuscada(String palabraBuscada) {
         this.palabraBuscada = palabraBuscada;
     }
+    public String getPalabraBuscada(){
+        return this.palabraBuscada;
+    }
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {

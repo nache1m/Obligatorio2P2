@@ -4,9 +4,14 @@ import Dominio.ArchivosLectura.ResaltadorColores;
 import Dominio.Entrevista;
 import Dominio.Postulante;
 import Dominio.Sistema;
+import java.awt.Desktop;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VentanaHistoriaPostulante extends javax.swing.JFrame {
@@ -62,9 +67,10 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame {
 
     public void resaltarPalabraEnComentarios(String palabraBuscada) {
         ResaltadorColores r = new ResaltadorColores();
+        r.setPalabraBuscada(palabraBuscada);
         for (Entrevista entrevista : modelo.getListaEntrevistas()) {
             String comentario = entrevista.getComentarios();
-            if (entrevista.getComentarios().contains(palabraBuscada)){
+            if (comentario.contains(r.getPalabraBuscada())) {
                 r.setPalabraBuscada(palabraBuscada);
             }
             tblEntrevistas.getColumnModel().getColumn(3).setCellRenderer(r);
@@ -176,7 +182,7 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame {
 
         jLabel2.setText("Buscar:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(70, 440, 40, 16);
+        jLabel2.setBounds(50, 440, 60, 16);
 
         jLabel3.setText("Cédula:");
         getContentPane().add(jLabel3);
@@ -214,6 +220,11 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame {
         txtBuscar.setBounds(120, 440, 310, 22);
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnLimpiar);
         btnLimpiar.setBounds(570, 440, 90, 23);
 
@@ -237,6 +248,13 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame {
         lblMail.setBounds(450, 200, 230, 20);
         getContentPane().add(lblFormato);
         lblFormato.setBounds(450, 260, 230, 20);
+
+        lblLinkedin.setForeground(new java.awt.Color(51, 102, 255));
+        lblLinkedin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLinkedinMouseClicked(evt);
+            }
+        });
         getContentPane().add(lblLinkedin);
         lblLinkedin.setBounds(450, 230, 310, 20);
 
@@ -248,6 +266,25 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame {
         String palabra = txtBuscar.getText();
         resaltarPalabraEnComentarios(palabra);
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        String limpiar = "";
+        resaltarPalabraEnComentarios(limpiar);
+        txtBuscar.setText(limpiar);
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void lblLinkedinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLinkedinMouseClicked
+        try {
+            if (Desktop.isDesktopSupported()){
+                Desktop desktop = Desktop.getDesktop();
+                if (desktop.isSupported(Desktop.Action.BROWSE)){
+                    desktop.browse(new URI (lblLinkedin.getText()));
+                }
+            } 
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_lblLinkedinMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
