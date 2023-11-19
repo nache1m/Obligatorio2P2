@@ -44,15 +44,17 @@ public class Sistema implements Serializable {
         listaTematicas = new ArrayList();
         manejador = new PropertyChangeSupport(this);
     }
-    public Sistema( Respaldo miRespaldo) { 
+
+    public Sistema(Respaldo miRespaldo) {
         listaPostulantes = new ArrayList(miRespaldo.getListaPostulantes());
         listaEvaluadores = new ArrayList(miRespaldo.getListaEvaluadores());
         listaPuestos = new ArrayList(miRespaldo.getListaPuestos());
         listaEntrevistas = new ArrayList(miRespaldo.getListaEntrevistas());
         listaTematicas = new ArrayList(miRespaldo.getListaTematicas());
         manejador = new PropertyChangeSupport(this);
-        
+
     }
+
     // Metodos.
     public boolean tematicaRepetida(String nombre) {
         ArrayList<Tematica> lista = this.listaTematicas;
@@ -146,7 +148,7 @@ public class Sistema implements Serializable {
         );
 
     }
-    
+
     public void ordenarPostulantesPorCedula() {
         if (listaPostulantes != null) {
             Collections.sort(listaPostulantes, new Comparator<Postulante>() {
@@ -264,14 +266,39 @@ public class Sistema implements Serializable {
         for (Entrevista elem : entrevistas) {
             res.add(elem.getPostulante());
         }
-        
+
         return res;
 
     }
 
+    public int cantidadPostulantesNivelMayorA5(Tematica t) {
+        int cant = 0;
+        for (Postulante p : this.listaPostulantes) {
+            HashMap<Tematica, Integer> hashMap = p.getNivelYTemas();
+            Collection<Tematica> llaves = hashMap.keySet();
+            for (Tematica llave : llaves) {
+                if (llave.equals(t) && (hashMap.get(llave) > 5)){
+                    cant++;
+                }
+            }
+        }
+        return cant;
+    }
     
+    public int cantidadPuestosRequierenConocimiento(Tematica t){
+        int cant = 0;
+        for (Puesto p : this.listaPuestos){
+            ArrayList <Tematica> temas = p.getTemas();
+            for (Tematica tema : temas){
+                if (tema.equals(t)){
+                    cant++;
+                }
+            }
+        }
+        return cant;
+    }
 
     public PropertyChangeSupport getManejador() {
-       return this.manejador;
+        return this.manejador;
     }
 }

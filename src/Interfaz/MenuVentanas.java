@@ -125,6 +125,11 @@ public class MenuVentanas extends javax.swing.JFrame {
         menTematica.add(itmRegistroTematica);
 
         itmConsultaTematica.setText("Consulta por temática");
+        itmConsultaTematica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmConsultaTematicaActionPerformed(evt);
+            }
+        });
         menTematica.add(itmConsultaTematica);
 
         menuBar.add(menTematica);
@@ -203,6 +208,11 @@ public class MenuVentanas extends javax.swing.JFrame {
        VentanaConsultaPuestos v = new VentanaConsultaPuestos(this.modelo);
        v.setVisible(true);
     }//GEN-LAST:event_itmConsultaPuestoActionPerformed
+
+    private void itmConsultaTematicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmConsultaTematicaActionPerformed
+        VentanaConsultaTematica v = new VentanaConsultaTematica(this.modelo);
+        v.setVisible(true);
+    }//GEN-LAST:event_itmConsultaTematicaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itmAltaPostulante;

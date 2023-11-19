@@ -83,6 +83,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Consulta por tem&#xe1;tica"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itmConsultaTematicaActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

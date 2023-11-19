@@ -1,5 +1,3 @@
-
-
 package Interfaz;
 
 import Dominio.Postulante;
@@ -17,6 +15,10 @@ public class VentanaAltaPostulante extends javax.swing.JFrame implements Propert
 
     public VentanaAltaPostulante(Sistema sistema) {
         initComponents();
+        grupoBotones.add(rbtnMixto);
+        grupoBotones.add(rbtnPresencial);
+        grupoBotones.add(rbtnRemoto);
+        rbtnRemoto.setSelected(true);
         this.modelo = sistema;
         modelo.agregarEscuchas(this);
     }
@@ -212,9 +214,7 @@ public class VentanaAltaPostulante extends javax.swing.JFrame implements Propert
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        grupoBotones.add(rbtnMixto);
-        grupoBotones.add(rbtnPresencial);
-        grupoBotones.add(rbtnRemoto);
+
         String nombre = txtNombre1.getText();
         String cedula = txtCedula.getText();
         String telefono = txtTelefono.getText();
@@ -224,20 +224,19 @@ public class VentanaAltaPostulante extends javax.swing.JFrame implements Propert
         // Remoto = 1
         //¨Presencial = 2
         int tipoDeTrabajo;
-        if(rbtnMixto.isSelected()) {
+        if (rbtnMixto.isSelected()) {
             tipoDeTrabajo = 0;
         } else {
             if (rbtnPresencial.isSelected()) {
                 tipoDeTrabajo = 2;
-            }
-            else {
+            } else {
                 tipoDeTrabajo = 1;
             }
-        } 
-       Postulante nuevoPostulante = new Postulante (nombre, cedula, telefono, LinkedIn, email, tipoDeTrabajo);
-       modelo.altaPostulante(nuevoPostulante);
-       VentanaAltaPostulante2 v = new VentanaAltaPostulante2(modelo, nuevoPostulante);
-       v.setVisible(true);
+        }
+        Postulante nuevoPostulante = new Postulante(nombre, cedula, telefono, LinkedIn, email, tipoDeTrabajo);
+        modelo.altaPostulante(nuevoPostulante);
+        VentanaAltaPostulante2 v = new VentanaAltaPostulante2(modelo, nuevoPostulante);
+        v.setVisible(true);
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed

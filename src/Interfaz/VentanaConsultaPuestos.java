@@ -37,7 +37,6 @@ public class VentanaConsultaPuestos extends javax.swing.JFrame implements Proper
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPuestos = new javax.swing.JList();
@@ -50,18 +49,12 @@ public class VentanaConsultaPuestos extends javax.swing.JFrame implements Proper
         lstPostulantes = new javax.swing.JList<>();
         btnCancelar = new javax.swing.JButton();
         btnExportar = new javax.swing.JButton();
+        lblBajaPostulante = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta para Puestos");
         setResizable(false);
         getContentPane().setLayout(null);
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Consulta para puestos");
-        jLabel1.setAutoscrolls(true);
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(79, 15, 223, 25);
 
         jLabel2.setText("Puestos:");
         getContentPane().add(jLabel2);
@@ -116,6 +109,12 @@ public class VentanaConsultaPuestos extends javax.swing.JFrame implements Proper
         getContentPane().add(btnExportar);
         btnExportar.setBounds(274, 527, 80, 23);
 
+        lblBajaPostulante.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblBajaPostulante.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBajaPostulante.setText("Consulta para puestos");
+        getContentPane().add(lblBajaPostulante);
+        lblBajaPostulante.setBounds(120, 20, 140, 16);
+
         setSize(new java.awt.Dimension(403, 587));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -144,13 +143,13 @@ public class VentanaConsultaPuestos extends javax.swing.JFrame implements Proper
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnExportar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblBajaPostulante;
     private javax.swing.JList<String> lstPostulantes;
     private javax.swing.JList lstPuestos;
     private javax.swing.JSpinner spnNivel;
