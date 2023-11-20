@@ -433,4 +433,14 @@ public class Sistema implements Serializable {
         }
         return res;
     }
+    
+    public boolean confirmarBaja(Postulante postulante) {
+        int opcion = JOptionPane.showConfirmDialog(
+            null,
+            "¿Estás seguro de dar de baja al Postulante: " + postulante.getNombre() + "?",
+            "Confirmación de Baja",
+            JOptionPane.YES_NO_OPTION
+        );
+        return opcion == JOptionPane.YES_OPTION;
+    }
     }

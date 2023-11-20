@@ -6,14 +6,16 @@ import Dominio.Postulante;
 import Dominio.Sistema;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author elnac
  */
 public class VentanaBajaPostulante extends javax.swing.JFrame implements PropertyChangeListener {
 
-   private Sistema modelo;
-   
+    private Sistema modelo;
+
     public VentanaBajaPostulante(Sistema miDominio) {
         initComponents();
         this.modelo = miDominio;
@@ -75,11 +77,14 @@ public class VentanaBajaPostulante extends javax.swing.JFrame implements Propert
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        Postulante p = (Postulante)lstPostulantes.getSelectedValue();
-        this.modelo.borrarPostulante(p);
-        lstPostulantes.setListData(modelo.getListaPostulantes().toArray());
-        
-        
+        Postulante p = (Postulante) lstPostulantes.getSelectedValue();
+        if (modelo.confirmarBaja(p)) {
+            this.modelo.borrarPostulante(p);
+            lstPostulantes.setListData(modelo.getListaPostulantes().toArray());
+            JOptionPane.showMessageDialog(null, "El Postulante fue borrado con éxito.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "El Postulante no fue eliminado.", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
@@ -97,6 +102,6 @@ public class VentanaBajaPostulante extends javax.swing.JFrame implements Propert
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-         lstPostulantes.setListData(modelo.getListaPostulantes().toArray());
+        lstPostulantes.setListData(modelo.getListaPostulantes().toArray());
     }
 }

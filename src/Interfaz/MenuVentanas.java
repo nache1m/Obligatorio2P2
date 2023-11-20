@@ -35,6 +35,7 @@ public class MenuVentanas extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
+        jLabel1 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         menPostulantes = new javax.swing.JMenu();
         itmAltaPostulante = new javax.swing.JMenuItem();
@@ -61,6 +62,10 @@ public class MenuVentanas extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(null);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Sin título.png"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 360, 380);
 
         menPostulantes.setText("Postulantes");
         menPostulantes.addActionListener(new java.awt.event.ActionListener() {
@@ -250,6 +255,7 @@ public class MenuVentanas extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmRegistroEvaluador;
     private javax.swing.JMenuItem itmRegistroPuesto;
     private javax.swing.JMenuItem itmRegistroTematica;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menEvaluadores;

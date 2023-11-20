@@ -50,8 +50,5 @@ public class Entrevista implements Serializable {
         this.puntaje = puntaje;
         this.comentarios = com;
         contadorIds++;
-    }
-    
-    // Metodos.
-    
+    }    
 }

@@ -287,7 +287,7 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame implements Pro
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_lblLinkedinMouseClicked
 

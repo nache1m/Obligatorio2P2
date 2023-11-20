@@ -7,6 +7,7 @@ import Dominio.Evaluador;
 import Dominio.Postulante;
 import Dominio.Sistema;
 import Excepciones.CampoVacioException;
+import Excepciones.verificoPuntajeException;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.logging.Level;
@@ -17,9 +18,10 @@ import javax.swing.JOptionPane;
  *
  * @author elnac
  */
-public class VentanaEntrevistas extends javax.swing.JFrame implements PropertyChangeListener{
+public class VentanaEntrevistas extends javax.swing.JFrame implements PropertyChangeListener {
+
     private Sistema modelo;
-    
+
     public VentanaEntrevistas(Sistema miDominio) {
         this.modelo = miDominio;
         initComponents();
@@ -28,7 +30,6 @@ public class VentanaEntrevistas extends javax.swing.JFrame implements PropertyCh
         lstEvaluadores.setListData(modelo.getListaEvaluadores().toArray());
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -123,7 +124,7 @@ public class VentanaEntrevistas extends javax.swing.JFrame implements PropertyCh
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         Evaluador ev = (Evaluador) lstEvaluadores.getSelectedValue();
         Postulante p = (Postulante) lstPostulantes.getSelectedValue();
-        int puntaje =  Integer.parseInt(String.valueOf(spnPuntaje.getValue()));
+        int puntaje = Integer.parseInt(String.valueOf(spnPuntaje.getValue()));
         String com = txtComent.getText();
         try {
             if (this.modelo.campoNoEstaVacio(com, "Comentarios") && this.modelo.verificoPuntaje(puntaje)) {
@@ -132,12 +133,14 @@ public class VentanaEntrevistas extends javax.swing.JFrame implements PropertyCh
                 spnPuntaje.setValue(0);
                 txtComent.setText("");
                 JOptionPane.showMessageDialog(null, "La entrevista fue agregada", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            } else {}
+            }
         } catch (CampoVacioException e) {
-           JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+        } catch (verificoPuntajeException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
         }
-        
-        
+
+
     }//GEN-LAST:event_btnIngresarActionPerformed
 
 
