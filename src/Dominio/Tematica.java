@@ -7,12 +7,9 @@ import java.io.Serializable;
 public class Tematica implements Serializable {
     private String nombre;
     private String descripcion;
-
     Tematica() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
- 
 
     // Getters y Setters.
     public String getNombre() {
