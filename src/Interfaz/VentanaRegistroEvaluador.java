@@ -115,7 +115,7 @@ public class VentanaRegistroEvaluador extends javax.swing.JFrame {
         try {
             if (this.modelo.campoNoEstaVacio(nombre, "Nombre")
                     && this.modelo.campoNoEstaVacio(cedula, "Cedula")
-                    && this.modelo.verificoCedula(cedula)
+                    && this.modelo.verificoCedula(cedula, "Evaluador")
                     && this.modelo.campoNoEstaVacio(direccion, "Dirección")
                     && this.modelo.campoNoEstaVacio(año, "Año")
                     && this.modelo.verificoAño(año) 

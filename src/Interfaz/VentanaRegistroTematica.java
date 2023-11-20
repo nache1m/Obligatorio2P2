@@ -107,14 +107,15 @@ public class VentanaRegistroTematica extends javax.swing.JFrame {
         modelo.agregarTematica(nuevaTematica);
         txtNombre.setText("");
         txtDesc.setText("");
+        this.dispose();
+        JOptionPane.showMessageDialog(null, "La temática fue creada con éxito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }
         catch (TematicaYaExisteException e) {
              JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
         } catch (CampoVacioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
         }
-        this.dispose();
-        JOptionPane.showMessageDialog(null, "La temática fue creada con éxito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        
 ;
     
     }//GEN-LAST:event_btnRegistrarActionPerformed

@@ -245,15 +245,18 @@ public class VentanaAltaPostulante extends javax.swing.JFrame implements Propert
         }
 
         try {
-            if (this.modelo.campoNoEstaVacio(nombre, "Nombre") && this.modelo.campoNoEstaVacio(cedula, "Cedula") && this.modelo.verificoCedula(cedula)
-                    && this.modelo.campoNoEstaVacio(direccion, "Dirección") && this.modelo.campoNoEstaVacio(telefono, "Telefono")
+            if (this.modelo.campoNoEstaVacio(nombre, "Nombre")
+                    && this.modelo.campoNoEstaVacio(cedula, "Cedula")
+                    && this.modelo.verificoCedula(cedula, "Postulante")
+                    && this.modelo.campoNoEstaVacio(direccion, "Dirección")
+                    && this.modelo.campoNoEstaVacio(telefono, "Telefono")
                     && this.modelo.verificoTelefono(telefono)
                     && this.modelo.campoNoEstaVacio(email, "Email")
                     && this.modelo.verificoMail(email)
                     && this.modelo.campoNoEstaVacio(LinkedIn, "LinkedIn")
                     && this.modelo.verificoLinkedIn(LinkedIn)) {
 
-                Postulante nuevoPostulante = new Postulante(nombre, cedula, telefono, LinkedIn, email, tipoDeTrabajo);
+                Postulante nuevoPostulante = new Postulante(nombre, cedula, telefono, direccion, LinkedIn, email, tipoDeTrabajo);
                 VentanaAltaPostulante2 v = new VentanaAltaPostulante2(modelo, nuevoPostulante, this);
                 v.setVisible(true);
             }
@@ -266,9 +269,9 @@ public class VentanaAltaPostulante extends javax.swing.JFrame implements Propert
         } catch (VerificarTelefonoException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
         } catch (verificarMailException e) {
-             JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
         } catch (verificoLinkedInException e) {
-             JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Hay uno o más campos con el formato inválido", "Alerta", JOptionPane.WARNING_MESSAGE);
         }

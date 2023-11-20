@@ -13,6 +13,7 @@ public class Postulante extends Persona implements Serializable {
     private String telefono;
     private String email;
     private String linkedIn;
+    private String direccion;
     private int tipoTrabajo;
     private HashMap<Tematica, Integer> nivelYTemas = new HashMap<>();
 
@@ -52,15 +53,18 @@ public class Postulante extends Persona implements Serializable {
     public HashMap getNivelYTemas() {
         return nivelYTemas;
     }
-
+    public String getDireccion() {
+        return direccion;
+    }
     public void setNivelYTemas(HashMap nivelYTemas) {
         this.nivelYTemas = nivelYTemas;
     }
 
     //Constructor sin Tematica y Nivel
-    public Postulante(String nombre, String cedula, String telefono, String linkedIn, String email, int tipoTrabajo) {
+    public Postulante(String nombre, String cedula, String telefono, String direccion, String linkedIn, String email, int tipoTrabajo) {
         super.setNombre(nombre);
         super.setCedula(cedula);
+        this.direccion = direccion;
         this.telefono = telefono;
         this.email = email;
         this.linkedIn = linkedIn;

@@ -57,9 +57,11 @@ public class VentanaHistoriaPostulante extends javax.swing.JFrame implements Pro
     public void cargarTabla(Postulante p) {
         ArrayList<Entrevista> listaEntrevistas = new ArrayList();
         for (Entrevista miEntrevista : modelo.getListaEntrevistas()) {
+            if (miEntrevista.getPostulante() != null) {
             if (miEntrevista.getPostulante().equals(p)) {
                 listaEntrevistas.add(miEntrevista);
             }
+        }
         }
         DefaultTableModel modelo = (DefaultTableModel) tblEntrevistas.getModel();
         modelo.setRowCount(0);

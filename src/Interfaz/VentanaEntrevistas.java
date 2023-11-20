@@ -60,6 +60,8 @@ public class VentanaEntrevistas extends javax.swing.JFrame implements PropertyCh
         getContentPane().add(lblBajaPostulante);
         lblBajaPostulante.setBounds(170, 30, 140, 16);
 
+        lstEvaluadores.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lstEvaluadores.setDragEnabled(true);
         jScrollPane1.setViewportView(lstEvaluadores);
 
         getContentPane().add(jScrollPane1);
@@ -73,6 +75,7 @@ public class VentanaEntrevistas extends javax.swing.JFrame implements PropertyCh
         getContentPane().add(jLabel2);
         jLabel2.setBounds(50, 190, 70, 16);
 
+        lstPostulantes.setSelectedIndex(1);
         jScrollPane2.setViewportView(lstPostulantes);
 
         getContentPane().add(jScrollPane2);
@@ -128,11 +131,15 @@ public class VentanaEntrevistas extends javax.swing.JFrame implements PropertyCh
         String com = txtComent.getText();
         try {
             if (this.modelo.campoNoEstaVacio(com, "Comentarios") && this.modelo.verificoPuntaje(puntaje)) {
-                Entrevista ent = new Entrevista(ev, p, puntaje, com);
-                modelo.agregarEntrevista(ent);
-                spnPuntaje.setValue(0);
-                txtComent.setText("");
-                JOptionPane.showMessageDialog(null, "La entrevista fue agregada", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                if (!(lstEvaluadores.getSelectedValue() == null) && !(lstPostulantes.getSelectedValue() == null)) {
+                    Entrevista ent = new Entrevista(ev, p, puntaje, com);
+                    modelo.agregarEntrevista(ent);
+                    spnPuntaje.setValue(0);
+                    txtComent.setText("");
+                    JOptionPane.showMessageDialog(null, "La entrevista fue agregada", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar un postulante y un evaluador para seguir adelante.", "Alerta", JOptionPane.WARNING_MESSAGE);
+                }
             }
         } catch (CampoVacioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Alerta", JOptionPane.WARNING_MESSAGE);

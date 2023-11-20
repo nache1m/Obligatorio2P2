@@ -300,9 +300,9 @@ public class Sistema implements Serializable {
         return res;
     }
 
-    public boolean verificoCedula(String cedula) throws CedulaRepetidaException, CedulaFormatoException {
+    public boolean verificoCedula(String cedula, String tipo) throws CedulaRepetidaException, CedulaFormatoException {
         boolean res = true;
-
+        
         try {
             int ci = Integer.parseInt(cedula);
         } catch (Exception e) {
@@ -313,13 +313,23 @@ public class Sistema implements Serializable {
             res = false;
             throw new CedulaFormatoException("La cédula debe escribirse sin puntos ni guiones y largo 8");
         }
+        if(tipo.equals("Postulante")) {
         for (Postulante elem : this.getListaPostulantes()) {
             if (elem.getCedula().equals(cedula)) {
                 res = false;
                 throw new CedulaRepetidaException("La cédula ingresaga ya existe. Por favor verifique");
             }
         }
-
+        }
+        if(tipo.equals("Evaluador")) {
+        for (Evaluador elem : this.getListaEvaluadores()) {
+            if (elem.getCedula().equals(cedula)) {
+                res = false;
+                throw new CedulaRepetidaException("La cédula ingresaga ya existe. Por favor verifique");
+            }
+        }
+        }
+       
         return res;
     }
 
